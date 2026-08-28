@@ -35,56 +35,141 @@
 <link rel="stylesheet" href="assets/css/common.css">
 <link rel="stylesheet" href="assets/css/main.css">
 
-<!-- JSON-LD : LegalService -->
+<!-- JSON-LD : 법률사무소 올본 (WebSite / WebPage / LegalService / Person) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LegalService",
-  "name": "법률사무소 올본",
-  "alternateName": "OLBON LAW OFFICE",
-  "url": "https://olbonlaw.com/",
-  "logo": "https://olbonlaw.com/assets/images/logo-navy.svg",
-  "image": "https://olbonlaw.com/assets/images/og-image.jpg",
-  "description": "변리사·변호사 이중 자격과 전기전자공학 배경을 갖춘 대표변호사가 지식재산권 및 민사·형사·가사·행정 사건을 직접 수행하는 법률사무소입니다.",
-  "telephone": "+82-10-7612-3038",
-  "email": "jhkim@olbonlaw.com",
-  "priceRange": "상담 후 협의",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "테헤란로 138 성홍타워 4층",
-    "addressLocality": "강남구",
-    "addressRegion": "서울특별시",
-    "postalCode": "06236",
-    "addressCountry": "KR"
-  },
-  "hasMap": "https://map.naver.com/p/search/%EB%93%9C%EB%A6%AC%EC%9B%80/place/1201398814",
-  "sameAs": ["https://blog.naver.com/law_jhk", "https://open.kakao.com/o/syCkuapi"],
-  "openingHoursSpecification": [{
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-    "opens": "09:00", "closes": "18:00"
-  }],
-  "areaServed": { "@type": "Country", "name": "대한민국" },
-  "founder": {
-    "@type": "Person",
-    "name": "김재훈",
-    "jobTitle": "대표변호사",
-    "alumniOf": ["연세대학교 전기전자공학과", "서강대학교 법학전문대학원"]
-  },
-  "knowsAbout": ["지식재산권","특허","상표","디자인","저작권","영업비밀","민사","형사","가사","행정"],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "업무분야",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "지식재산권" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "민사" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "형사" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "가사" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "행정" } }
-    ]
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://olbonlaw.com/#website",
+      "url": "https://olbonlaw.com/",
+      "name": "법률사무소 올본",
+      "alternateName": ["OLBON LAW OFFICE", "올본", "올본법률사무소", "올본 법률사무소", "OLBON"],
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://olbonlaw.com/#office" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://olbonlaw.com/#webpage",
+      "url": "https://olbonlaw.com/",
+      "name": "법률사무소 올본 | 지식재산권·특허소송 중심 법률사무소",
+      "isPartOf": { "@id": "https://olbonlaw.com/#website" },
+      "about": { "@id": "https://olbonlaw.com/#office" },
+      "inLanguage": "ko-KR"
+    },
+    {
+      "@type": "LegalService",
+      "@id": "https://olbonlaw.com/#office",
+      "name": "법률사무소 올본",
+      "alternateName": ["OLBON LAW OFFICE", "올본", "올본법률사무소", "올본 법률사무소", "OLBON"],
+      "legalName": "법률사무소 올본",
+      "url": "https://olbonlaw.com/",
+      "mainEntityOfPage": { "@id": "https://olbonlaw.com/#webpage" },
+      "logo": "https://olbonlaw.com/assets/images/logo-navy.svg",
+      "image": [
+        "https://olbonlaw.com/assets/images/og-image.jpg",
+        "https://olbonlaw.com/assets/images/attorney.jpg"
+      ],
+      "description": "변리사·변호사 이중 자격과 전기전자공학 배경을 갖춘 김재훈 대표변호사가 지식재산권(특허·상표·디자인·저작권)과 민사·형사·가사·행정 사건을 상담부터 종결까지 직접 수행하는 서울 강남 테헤란로의 법률사무소입니다.",
+      "slogan": "올바른 본질을 봅니다",
+      "telephone": "+82-10-7612-3038",
+      "email": "jhkim@olbonlaw.com",
+      "currenciesAccepted": "KRW",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "테헤란로 138 성홍타워 4층",
+        "addressLocality": "강남구",
+        "addressRegion": "서울특별시",
+        "postalCode": "06236",
+        "addressCountry": "KR"
+      },
+      "sameAs": [
+        "https://blog.naver.com/law_jhk",
+        "https://open.kakao.com/o/syCkuapi"
+      ],
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00", "closes": "18:00"
+      }],
+      "areaServed": [
+        { "@type": "City", "name": "서울특별시" },
+        { "@type": "AdministrativeArea", "name": "강남구" },
+        { "@type": "Country", "name": "대한민국" }
+      ],
+      "knowsLanguage": ["ko", "en"],
+      "knowsAbout": [
+        "지식재산권","특허침해소송","특허무효심판","상표권 분쟁","디자인권",
+        "저작권","영업비밀 유출","부정경쟁방지법","민사소송","형사변호","가사","행정소송"
+      ],
+      "founder": { "@id": "https://olbonlaw.com/#kimjaehoon" },
+      "employee": { "@id": "https://olbonlaw.com/#kimjaehoon" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "업무분야",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "지식재산권",
+            "description": "특허·상표·디자인·저작권·영업비밀 관련 분쟁과 침해 대응, 심판·소송 수행",
+            "url": "https://olbonlaw.com/practice-ip.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "민사",
+            "description": "계약·손해배상·채권 등 민사 분쟁의 소송 및 협상 수행",
+            "url": "https://olbonlaw.com/practice-civil.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "형사",
+            "description": "수사 단계부터 재판까지 형사 변호",
+            "url": "https://olbonlaw.com/practice-criminal.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "가사",
+            "description": "이혼·재산분할·상속 등 가사 사건 수행",
+            "url": "https://olbonlaw.com/practice-family.html" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "행정",
+            "description": "행정처분 취소·집행정지 등 행정 사건 수행",
+            "url": "https://olbonlaw.com/practice-admin.html" } }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://olbonlaw.com/#kimjaehoon",
+      "name": "김재훈",
+      "givenName": "재훈",
+      "familyName": "김",
+      "jobTitle": ["변호사", "변리사"],
+      "description": "변리사(제49회, 2012)와 변호사(제9회, 2020) 자격을 함께 보유하고 전기전자공학을 전공한 법률사무소 올본 대표변호사입니다.",
+      "url": "https://olbonlaw.com/attorney.html",
+      "image": "https://olbonlaw.com/assets/images/attorney.jpg",
+      "worksFor": { "@id": "https://olbonlaw.com/#office" },
+      "knowsLanguage": ["ko", "en"],
+      "knowsAbout": ["특허","상표","디자인","저작권","영업비밀","지식재산권 소송","형사","민사"],
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "연세대학교 전기전자공학과" },
+        { "@type": "CollegeOrUniversity", "name": "서강대학교 법학전문대학원" }
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "변리사",
+          "credentialCategory": "professional license",
+          "recognizedBy": { "@type": "Organization", "name": "특허청" }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "변호사",
+          "credentialCategory": "professional license",
+          "recognizedBy": { "@type": "Organization", "name": "대한변호사협회" }
+        }
+      ],
+      "sameAs": ["https://blog.naver.com/law_jhk"]
+    }
+  ]
 }
 </script>
+
+<!-- ※ 좌표(geo)를 확인하면 아래 블록을 LegalService 의 "sameAs" 윗줄에 넣으세요.
+     네이버지도에서 성홍타워 우클릭 → 좌표 복사
+      "geo": { "@type": "GeoCoordinates", "latitude": 37.500000, "longitude": 127.030000 },
+     스마트플레이스 등록 후에는 아래 줄도 함께 추가하세요.
+      "hasMap": "본인 플레이스 URL",
+-->
 </head>
 
 <body data-page="home">
