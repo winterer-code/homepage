@@ -1,0 +1,9 @@
+# 법률사무소 올본 (OLBON LAW OFFICE)
+User-agent: *
+Allow: /
+
+# 네이버 검색로봇
+User-agent: Yeti
+Allow: /
+
+Sitemap: https://olbonlaw.com/sitemap.xml
