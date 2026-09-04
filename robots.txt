@@ -6,4 +6,4 @@ Allow: /
 User-agent: Yeti
 Allow: /
 
-Sitemap: https://olbonlaw.com/sitemap.xml
+Sitemap: https://www.olbonlaw.com/sitemap.xml
