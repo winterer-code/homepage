@@ -140,7 +140,7 @@
 /* --------------------------------------------------------------------------
    3. 대표 변호사 소개 : 프로필 + 타임라인
    -------------------------------------------------------------------------- */
-.profile { display: grid; grid-template-columns: 400px 1fr; gap: 64px; align-items: start; }
+.profile { display: grid; grid-template-columns: 400px 1fr; gap: 64px; align-items: center; }
 .profile__photo .ph { aspect-ratio: 4 / 5; border-radius: var(--r-md); }
 .profile__badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .profile__name { font-size: 38px; color: var(--navy); }
