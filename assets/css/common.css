@@ -485,7 +485,7 @@ select.form-control {
 /* --------------------------------------------------------------------------
    상담 방법 카드 (전화 · 카카오톡 · 이메일)
    -------------------------------------------------------------------------- */
-.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 840px; margin: 0 auto; }
 .contact-card {
   display: flex; flex-direction: column; text-align: center;
   padding: 40px 30px 30px; background: #fff;

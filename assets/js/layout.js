@@ -14,9 +14,8 @@
   var SITE = {
     nameKo: "법률사무소 올본",
     nameEn: "OLBON LAW OFFICE",
-    tel: "010-7612-3038",
-    telHref: "tel:01076123038",   // 하이픈 없는 숫자만 — 모든 다이얼러 호환
-    fax: "[팩스번호]",              // TODO: 실제 팩스번호 입력
+    /* 상담 창구는 카카오톡 오픈채팅과 이메일 두 가지입니다.
+       전화·팩스 항목은 사용하지 않으므로 두지 않습니다. */
     email: "jhkim@olbonlaw.com",
     address: "서울 강남구 테헤란로 138 성홍타워 4층",
     bizNo: "[사업자등록번호]",       // TODO: 실제 사업자등록번호 입력
@@ -104,7 +103,7 @@
       key: "consult", label: "상담안내", href: "consult.html",
       sub: [
         { label: "상담 절차 안내", href: "consult.html#process" },
-        { label: "상담 방법 (전화·카톡·메일)", href: "consult.html#contact" },
+        { label: "상담 방법 (카톡·메일)", href: "consult.html#contact" },
         { label: "자주 묻는 질문", href: "consult.html#faq" }
       ]
     }
@@ -139,8 +138,8 @@
       '<h1 class="header__logo">' + logoHtml(false) + "</h1>" +
       '<nav class="gnb-wrap" aria-label="주 메뉴"><ul class="gnb">' + gnbHtml() + "</ul></nav>" +
       '<div class="header__util">' +
-      '<a href="' + SITE.telHref + '" class="header__tel" data-tel="' + SITE.tel + '">' + ICON.phone +
-      "<span><small>상담전화</small>" + SITE.tel + "</span></a>" +
+      '<a href="' + SITE.kakaoUrl + '" class="header__tel" target="_blank" rel="noopener">' + ICON.chat +
+      "<span><small>상담 문의</small>카카오톡 상담</span></a>" +
       '<button type="button" class="header__toggle" id="navToggle" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="mobileNav">' +
       "<span></span><span></span><span></span></button>" +
       "</div></div></header>"
@@ -167,7 +166,7 @@
       '<button type="button" class="mnav__close" id="navClose" aria-label="전체 메뉴 닫기"></button></div>' +
       '<nav class="mnav__body" aria-label="모바일 주 메뉴"><ul>' + items + "</ul></nav>" +
       '<div class="mnav__foot">' +
-      '<a href="' + SITE.telHref + '" class="mnav__tel" data-tel="' + SITE.tel + '">' + SITE.tel + "</a>" +
+      '<a href="' + SITE.kakaoUrl + '" class="mnav__tel" target="_blank" rel="noopener">카카오톡 상담</a>' +
       "<p>" + SITE.hours + "</p></div></div>"
     );
   }
@@ -177,7 +176,6 @@
       '<aside class="quick" aria-label="빠른 상담 메뉴">' +
       '<div class="quick__head">QUICK<br>MENU</div>' +
       '<ul class="quick__list">' +
-      '<li><a href="' + SITE.telHref + '" data-tel="' + SITE.tel + '">' + ICON.phone + "<span>전화상담</span></a></li>" +
       '<li><a href="' + SITE.kakaoUrl + '" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡</span></a></li>" +
       '<li><a href="' + SITE.mailHref + '">' + ICON.mail + "<span>이메일상담</span></a></li>" +
       '<li><a href="location.html">' + ICON.map + "<span>오시는길</span></a></li>" +
@@ -185,8 +183,7 @@
       "</ul></aside>" +
       /* 모바일 하단 고정 바 */
       '<nav class="quickbar" aria-label="빠른 상담 메뉴(모바일)">' +
-      '<a href="' + SITE.telHref + '" class="is-point" data-tel="' + SITE.tel + '">' + ICON.phone + "<span>전화상담</span></a>" +
-      '<a href="' + SITE.kakaoUrl + '" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡</span></a>" +
+      '<a href="' + SITE.kakaoUrl + '" class="is-point" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡</span></a>" +
       '<a href="' + SITE.mailHref + '">' + ICON.mail + "<span>이메일상담</span></a>" +
       '<a href="location.html">' + ICON.map + "<span>오시는길</span></a>" +
       '<button type="button" data-scroll-top>' + ICON.top + "<span>TOP</span></button>" +
@@ -205,7 +202,6 @@
       '<a href="practice-ip.html">업무분야</a>' +
       '<a href="cases.html">성공사례</a>' +
       '<a href="consult.html">상담안내</a>' +
-      '<a href="privacy.html" class="is-strong">개인정보처리방침</a>' +
       "</nav></div></div>" +
 
       '<div class="footer__main"><div class="container">' +
@@ -215,8 +211,6 @@
       "<div><dt>대표변호사</dt><dd>" + SITE.ceo + "</dd></div>" +
       "<div><dt>사업자등록번호</dt><dd>" + SITE.bizNo + "</dd></div>" +
       "<div><dt>주소</dt><dd>" + SITE.address + "</dd></div>" +
-      "<div><dt>전화</dt><dd>" + SITE.tel + "</dd></div>" +
-      "<div><dt>팩스</dt><dd>" + SITE.fax + "</dd></div>" +
       "<div><dt>이메일</dt><dd>" + SITE.email + "</dd></div>" +
       "</dl>" +
       '<p class="footer__notice">본 웹사이트에 게시된 내용은 일반적인 법률 정보 제공을 목적으로 하며, 개별 사건에 대한 법률 자문이 아닙니다. ' +
@@ -226,7 +220,7 @@
       "</div>" +
 
       '<div class="footer__cta">' +
-      '<a href="' + SITE.telHref + '" class="tel" data-tel="' + SITE.tel + '"><span>CONSULTATION</span>' + SITE.tel + "</a>" +
+      '<a href="' + SITE.kakaoUrl + '" class="tel" target="_blank" rel="noopener"><span>CONSULTATION</span>카카오톡 상담</a>' +
       '<p class="time">' + SITE.hours + "</p>" +
       '<a href="consult.html#contact" class="btn btn--gold btn--block">상담 방법 보기</a>' +
       '<div class="footer__sns">' +

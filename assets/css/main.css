@@ -40,6 +40,14 @@
 .hero__title { font-size: 60px; line-height: 1.25; letter-spacing: -0.035em; text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3); }
 .hero__title .pt { color: var(--gold-light); }
 .hero__desc { margin-top: 22px; font-size: 19px; line-height: 1.7; color: rgba(255, 255, 255, 0.85); max-width: 620px; }
+/* 경력 3줄 — 제목 아래에서 한 덩어리로 강조 */
+.hero__desc--cred {
+  margin-top: 26px; padding-left: 20px; border-left: 2px solid var(--gold);
+  font-size: 23px; font-weight: 500; line-height: 1.62;
+  letter-spacing: -0.015em; color: rgba(255, 255, 255, 0.95);
+  word-break: keep-all; max-width: 680px;
+}
+.hero__desc--cred b { font-weight: 700; color: var(--gold-light); }
 .hero__btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
 
 /* 슬라이드 인 애니메이션 */
@@ -278,6 +286,7 @@
   .hero { height: 78vh; min-height: 520px; }
   .hero__title { font-size: 42px; }
   .hero__desc { font-size: 17px; }
+  .hero__desc--cred { font-size: 20px; padding-left: 16px; }
   .hero__ctrl { bottom: 30px; }
 
   .intro__grid { grid-template-columns: 1fr; gap: 44px; }
@@ -306,6 +315,7 @@
   .hero__bg { background-position: 58% center; }
   .hero__title { font-size: 31px; }
   .hero__desc { font-size: 16px; margin-top: 16px; }
+  .hero__desc--cred { font-size: 16.5px; margin-top: 18px; padding-left: 13px; line-height: 1.7; }
   .hero__btns { margin-top: 28px; }
   .hero__btns .btn { flex: 1 1 auto; }
   .hero__ctrl { bottom: 26px; gap: 12px; }

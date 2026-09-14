@@ -223,7 +223,7 @@
 
   /* ------------------------------------------------------------------
      8. 온라인 상담 폼 — 유효성 검사 + 실제 전송
-        ※ 현재 사이트에는 상담 폼이 없습니다(전화·카카오톡·이메일 버튼으로 대체).
+        ※ 현재 사이트에는 상담 폼이 없습니다(카카오톡·이메일 버튼으로 대체).
           아래 코드는 나중에 폼을 다시 넣고 싶을 때를 위해 남겨둔 것으로,
           form[data-consult-form] 이 없으면 아무 동작도 하지 않습니다.
         · 기본 전송 경로 : 같은 폴더의 send.php  (PHP 지원 호스팅이면 그대로 동작)
@@ -239,8 +239,7 @@
        ""          → 서버 없이 '메일 앱으로 보내기' 방식으로 동작
        "https://…" → 외부 폼 서비스나 자체 API 주소 */
     endpoint: "send.php",
-    email: (window.OLBON_SITE && window.OLBON_SITE.email) || "jhkim@olbonlaw.com",
-    tel: (window.OLBON_SITE && window.OLBON_SITE.tel) || "010-7612-3038"
+    email: (window.OLBON_SITE && window.OLBON_SITE.email) || "jhkim@olbonlaw.com"
   };
 
   /* 전송 실패 원인 진단 — 무엇을 고쳐야 할지 바로 알 수 있게 안내합니다. */
@@ -500,7 +499,7 @@
   });
 
   /* ------------------------------------------------------------------
-     10. 전화 걸기 / 주소 복사 / 지도 로드 실패 대응
+     10. 주소 복사 / 지도 로드 실패 대응
      ------------------------------------------------------------------ */
   var toastEl = null, toastTimer = null;
   function showToast(html, ms) {
@@ -544,27 +543,7 @@
     showToast(copyText(t) ? "복사했습니다 · <b>" + t + "</b>" : "<b>" + t + "</b>", 3500);
   });
 
-  /* 전화 링크
-     통화 앱이 열리지 않는 환경(PC 브라우저, 휴대폰의 파일 미리보기 등)에서는
-     번호를 띄워 직접 걸거나 복사할 수 있게 안내합니다. */
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest("a[data-tel]");
-    if (!a) return;
-    var num = a.getAttribute("data-tel");
-    var left = false;
-    var mark = function () { left = true; };
-    window.addEventListener("pagehide", mark);
-    window.addEventListener("blur", mark);
-    document.addEventListener("visibilitychange", mark);
-    setTimeout(function () {
-      window.removeEventListener("pagehide", mark);
-      window.removeEventListener("blur", mark);
-      document.removeEventListener("visibilitychange", mark);
-      if (left || document.hidden) return;   /* 통화 앱으로 잘 넘어감 */
-      showToast('<span>통화 앱이 열리지 않으면 직접 걸어 주세요</span><b>' + num +
-                '</b><button type="button" data-copy="' + num + '">번호 복사</button>', 8000);
-    }, 900);
-  });
+  /* (전화 상담을 운영하지 않으므로 전화 링크 보조 안내 기능은 제거했습니다) */
 
   /* 지도 iframe 이 차단되거나 실패하면 대체 화면 표시 */
   Array.prototype.forEach.call(document.querySelectorAll("[data-map]"), function (box) {
