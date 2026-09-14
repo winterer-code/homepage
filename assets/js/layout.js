@@ -89,13 +89,13 @@
       sub: [{ label: "김재훈 변호사", href: "attorney.html" }]
     },
     {
-      key: "practice", label: "업무분야", href: "practice-ip.html",
+      key: "practice", label: "업무분야", href: "practice-criminal.html",
       sub: [
-        { label: "민사", href: "practice-civil.html" },
         { label: "형사", href: "practice-criminal.html" },
-        { label: "가사", href: "practice-family.html" },
+        { label: "지식재산권", href: "practice-ip.html" },
+        { label: "민사", href: "practice-civil.html" },
         { label: "행정", href: "practice-admin.html" },
-        { label: "지식재산권", href: "practice-ip.html" }
+        { label: "가사", href: "practice-family.html" }
       ]
     },
     { key: "cases", label: "성공사례", href: "cases.html", sub: [] },
@@ -199,7 +199,7 @@
       '<nav class="footer__links" aria-label="푸터 메뉴">' +
       '<a href="about.html">법률사무소 올본</a>' +
       '<a href="attorney.html">대표 변호사 소개</a>' +
-      '<a href="practice-ip.html">업무분야</a>' +
+      '<a href="practice-criminal.html">업무분야</a>' +
       '<a href="cases.html">성공사례</a>' +
       '<a href="consult.html">상담안내</a>' +
       "</nav></div></div>" +

@@ -148,24 +148,12 @@
 .pract-card__more { margin-top: auto; padding-top: 22px; }
 
 /* 지식재산권 = 2칸 차지 + 네이비 강조 */
-.pract-card--ip {
-  grid-column: span 2;
-  background: linear-gradient(120deg, #0f2540 0%, #1b3b60 100%);
-  border-color: transparent; color: #fff;
-}
-.pract-card--ip .pract-card__title { color: #fff; }
-.pract-card__desc, .pract-card--ip .pract-card__desc { }
-.pract-card--ip .pract-card__desc { color: rgba(255, 255, 255, 0.75); }
-.pract-card--ip .pract-card__icon { background: rgba(255, 255, 255, 0.12); color: var(--gold-light); }
-.pract-card--ip:hover .pract-card__icon { background: var(--gold); color: #fff; }
-.pract-card--ip .pract-card__en { color: var(--gold-light); }
-.pract-card--ip::after { background: var(--gold-light); }
+/* 지식재산권 카드 — 색·크기 모두 다른 카드와 동일합니다. (태그 목록만 추가로 표시) */
 .pract-card--ip .pract-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .pract-card--ip .pract-tags span {
-  padding: 6px 13px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 100px;
-  font-size: 13px; color: rgba(255, 255, 255, 0.85);
+  padding: 6px 13px; border: 1px solid var(--gray-line); border-radius: 100px;
+  font-size: 13px; color: var(--gray-text);
 }
-.pract-card--ip .link-more { color: var(--gold-light); }
 
 /* --------------------------------------------------------------------------
    ⑤ 성공사례 슬라이더
@@ -293,7 +281,6 @@
   .intro__photo { max-width: 400px; }
 
   .pract__grid { grid-template-columns: repeat(2, 1fr); }
-  .pract-card--ip { grid-column: span 2; }
 
   .process__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .process-step:nth-child(3)::before { display: none; }
@@ -328,7 +315,6 @@
   .intro__quote { font-size: 17px; }
 
   .pract__grid { grid-template-columns: 1fr; }
-  .pract-card--ip { grid-column: span 1; }
   .pract-card { padding: 30px 24px 28px; }
 
   .cases__head { flex-direction: column; align-items: flex-start; }
