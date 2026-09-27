@@ -194,7 +194,7 @@ h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.35; letter-spacing: -0.03e
    크기를 바꾸려면 --logo-h 하나만 조절하면 전체가 함께 변합니다. */
 .logo {
   --logo-h: 46px;
-  display: inline-flex; align-items: center;
+  display: inline-flex; align-items: center; vertical-align: top;   /* 글자 기준선 아래 여백 제거 → 위·아래 여백 동일 */
   gap: calc(var(--logo-h) * 0.292); color: var(--navy);
 }
 .logo__mark { width: calc(var(--logo-h) * 0.915); height: var(--logo-h); flex: none; }
@@ -230,6 +230,7 @@ h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.35; letter-spacing: -0.03e
   display: flex; align-items: center; justify-content: space-between;
   height: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
 }
+.header__logo { display: flex; align-items: center; }   /* h1 글자 높이만큼 생기던 아래 여백 제거 */
 /* 투명 상태(메인 히어로 위) 기본 글자색 — 로고는 샴페인 골드 */
 .header .logo { color: var(--champagne); }
 .header .gnb__link { color: #fff; }
