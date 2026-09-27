@@ -242,8 +242,6 @@ def detail_html(c, older, newer):
     faq = c.get("faq") or []
     if faq:
         toc.append(("faq", "자주 묻는 질문"))
-    y, m, d = c["date"].split("-")
-    date_ko = f"{int(y)}. {int(m)}. {int(d)}."
     desc = c.get("description") or c.get("lead", "")
     keywords = ", ".join(c.get("keywords", []))
     tags = "".join(f"<li>{esc(t)}</li>" for t in c.get("tags", []))
@@ -321,10 +319,6 @@ def detail_html(c, older, newer):
         <header class="case-view__head">
           <span class="tag{' tag--ip' if c['category'] == 'ip' else ''}">{CATEGORIES[c['category']]}</span>
           <h1 class="case-view__title">{esc(c['title'])}</h1>
-          <p class="case-view__meta">
-            <span>작성 <a href="attorney.html">김재훈 변호사·변리사</a></span>
-            <span>게시일 <time datetime="{c['date']}">{date_ko}</time></span>
-          </p>
           <ul class="case-view__tags">{tags}</ul>
         </header>
 
