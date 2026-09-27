@@ -156,7 +156,7 @@
 
 /* 타임라인 */
 .tl-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 60px; }
-.tl-groups .tl-group--career { grid-column: span 2; }
+.tl-groups .tl-group--career, .tl-groups .tl-group--wide { grid-column: span 2; }
 .tl-group__title {
   display: flex; align-items: center; gap: 12px; margin-bottom: 22px;
   font-size: 22px; color: var(--navy);
@@ -358,7 +358,7 @@
   .profile { grid-template-columns: 1fr; gap: 36px; }
   .profile__photo { max-width: 360px; }
   .tl-groups { grid-template-columns: 1fr; gap: 34px; }
-  .tl-groups .tl-group--career { grid-column: span 1; }
+  .tl-groups .tl-group--career, .tl-groups .tl-group--wide { grid-column: span 1; }
   .case-grid { grid-template-columns: repeat(2, 1fr); }
   .step-grid { grid-template-columns: repeat(2, 1fr); }
   .step-item:nth-child(3)::before { display: none; }
