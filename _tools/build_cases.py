@@ -13,7 +13,6 @@ _cases 폴더가 바뀔 때마다 자동으로 실행합니다.
   · 새 사례에는 분야별 다음 번호가 자동으로 붙고, 그 번호가 .md 머리말의 id 에 기록됩니다.
   · 한 번 발급된 번호는 _tools/issued_ids.txt 에 남아 다시 쓰이지 않습니다(사례를 지워도).
   · 나중에 분야(category)를 바꿔도 id(주소)는 그대로 유지됩니다.
-  · 예전 주소는 머리말 aliases 에 적으면 새 주소로 이동하는 안내 페이지가 만들어집니다.
 
 사용법:  python _tools/build_cases.py
 필요 패키지:  pip install markdown pyyaml
@@ -132,7 +131,6 @@ def load_cases():
         meta["updated"] = str(meta.get("updated") or meta["date"])
         if isinstance(meta["card_title"], str):
             meta["card_title"] = [meta["card_title"]]
-        meta["aliases"] = [a for a in (meta.get("aliases") or []) if a]
         cases.append(meta)
 
     # 번호가 없는 새 사례: 게시일 → 파일 이름 순으로 분야별 다음 번호 발급
@@ -383,26 +381,6 @@ def detail_html(c, older, newer):
 """
 
 
-def alias_html(c):
-    target = c["url_path"]
-    return f"""<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<!-- 예전 주소 안내 페이지 — _cases/{c['_file'].name} 의 aliases 에서 자동 생성됩니다. -->
-<title>페이지 주소가 변경되었습니다 | 법률사무소 올본</title>
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="{SITE}/{target}">
-<meta http-equiv="refresh" content="0; url={target}">
-<script>location.replace("{target}" + location.hash);</script>
-</head>
-<body>
-<p>페이지 주소가 변경되었습니다. <a href="{target}">{esc(c['title'])}</a>(으)로 이동합니다.</p>
-</body>
-</html>
-"""
-
-
 # --------------------------------------------------------------------------
 # 4. 표시 구간 교체 (<!-- CASES:START --> … <!-- CASES:END -->)
 # --------------------------------------------------------------------------
@@ -425,7 +403,7 @@ def build():
     cases = load_cases()
 
     # 이전 빌드에서 만들어졌지만 지금은 없는(삭제·비공개) 상세 페이지 정리
-    live = {c["url_path"] for c in cases} | {a for c in cases for a in c["aliases"]}
+    live = {c["url_path"] for c in cases}
     for old in ROOT.glob("case-*.html"):
         if old.name not in live and "자동 생성됩니다" in old.read_text(encoding="utf-8")[:600]:
             old.unlink()
@@ -437,13 +415,6 @@ def build():
         page = detail_html(c, older, newer)
         if not out.exists() or out.read_text(encoding="utf-8") != page:
             out.write_text(page, encoding="utf-8")
-        for alias in c["aliases"]:
-            stub = ROOT / alias
-            if stub.resolve().parent != ROOT or not alias.endswith(".html"):
-                sys.exit(f"[오류] {c['_file'].name}: aliases 는 'case-예전이름.html' 형식이어야 합니다.")
-            page = alias_html(c)
-            if not stub.exists() or stub.read_text(encoding="utf-8") != page:
-                stub.write_text(page, encoding="utf-8")
 
     cards = "\n\n".join(card_html(c) for c in cases)
     replace_block(ROOT / "cases.html", "CASES", indent(cards, 8))

@@ -1,6 +1,5 @@
 ---
 id: ip-001
-aliases: [case-trademark-infringement-punitive-damages.html]
 published: true
 date: 2026-09-27
 category: ip
