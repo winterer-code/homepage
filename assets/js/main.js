@@ -75,10 +75,10 @@
     new Swiper(".cases .swiper", {
       slidesPerView: 1.12,          /* 모바일: 다음 카드가 살짝 보이도록 */
       spaceBetween: 16,
-      speed: 700,
+      speed: 500,
       loop: caseCount > 3,          /* 마지막 사례 뒤에 처음 사례로 자연스럽게 이어짐 */
-      /* 4초마다 자동으로 넘어감. 마우스를 올리면 잠시 멈추고, 손으로 넘긴 뒤에도 다시 자동 재생 */
-      autoplay: reduceMotion ? false : { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      /* 1초마다 자동으로 넘어감. 마우스를 올리면 잠시 멈추고, 손으로 넘긴 뒤에도 다시 자동 재생 */
+      autoplay: reduceMotion ? false : { delay: 1000, disableOnInteraction: false, pauseOnMouseEnter: true },
       a11y: { containerMessage: "업무사례 슬라이드" },
       navigation: { prevEl: ".cases__prev", nextEl: ".cases__next" },
       pagination: { el: ".cases__pagination", clickable: true },
