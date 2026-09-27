@@ -1,0 +1,97 @@
+@charset "utf-8";
+/* ==========================================================================
+   법률사무소 올본 — cases.css
+   업무사례 카드(목록·메인 공용) + 사례 상세 본문
+   카드·본문은 _tools/build_cases.py 가 _cases/*.md 로부터 자동 생성합니다.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 업무사례 카드
+   -------------------------------------------------------------------------- */
+.ob-card {
+  --ob-navy: #1f345b;
+  display: flex; flex-direction: column; height: 100%;
+  background: #fff; border: 1px solid #dfe3ea; border-radius: 14px; overflow: hidden;
+  color: #1b2230; text-decoration: none;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.ob-card[hidden] { display: none; }
+.ob-card:hover, .ob-card:focus-visible { border-color: var(--ob-navy); box-shadow: 0 10px 28px rgba(31, 52, 91, 0.12); transform: translateY(-4px); }
+.ob-card__band { display: block; height: 6px; background: var(--ob-navy); }
+.ob-card__body {
+  flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 28px 26px 30px;
+}
+.ob-card__cat {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: var(--ob-navy);
+  border: 1px solid var(--ob-navy); border-radius: 999px; padding: 4px 14px;
+}
+.ob-card__type { margin: 24px 0 8px; font-size: 15px; font-weight: 500; color: #5b6475; letter-spacing: -0.01em; }
+.ob-card__title {
+  display: block; font-size: 22px; font-weight: 700; line-height: 1.45; letter-spacing: -0.035em;
+  color: #1b2230; word-break: keep-all; text-wrap: balance;
+}
+.ob-card__rule { display: block; width: 28px; height: 2px; background: var(--ob-navy); margin: 22px 0 18px; }
+.ob-card__result {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 15px; font-weight: 600; color: var(--ob-navy); letter-spacing: -0.02em; word-break: keep-all;
+}
+.ob-card__result svg { width: 16px; height: 16px; flex: none; }
+.ob-card__foot { display: flex; justify-content: center; padding: 16px 0; background: #f7f8fb; border-top: 1px solid #eceff4; }
+.ob-card__foot img { height: 30px; width: auto; }
+
+/* 목록 페이지 — 기존 .case-card 스타일 덮어쓰기 */
+.case-grid .case-card.ob-card { padding: 0; border-radius: 14px; }
+.case-grid .case-card.ob-card:hover { transform: translateY(-4px); }
+
+/* 메인 슬라이더 */
+.cases .swiper-slide { height: auto; }
+
+/* --------------------------------------------------------------------------
+   2. 사례 상세
+   -------------------------------------------------------------------------- */
+.case-view { max-width: 920px; }
+.case-view__head .case-view__title { margin: 16px 0 14px; font-size: 30px; font-weight: 700; line-height: 1.4; letter-spacing: -0.03em; color: var(--navy); word-break: keep-all; }
+.case-view__meta a { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.case-view__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.case-view__tags li { font-size: 13px; color: var(--gray-text); border: 1px solid var(--gray-line); border-radius: 999px; padding: 3px 11px; }
+
+.case-view__lead { margin: 0 0 28px; font-size: 17.5px; line-height: 1.8; color: #333; word-break: keep-all; }
+
+.case-view__toc { margin: 0 0 44px; padding: 18px 22px; background: var(--gray-bg); border-radius: var(--r-md); font-size: 15px; }
+.case-view__toc strong { color: var(--navy); }
+.case-view__toc ol { margin-top: 8px; padding-left: 20px; list-style: decimal; }
+.case-view__toc li { margin: 3px 0; }
+.case-view__toc a { color: #333; }
+.case-view__toc a:hover { color: var(--navy); text-decoration: underline; }
+
+.case-view__body h3 {
+  margin: 52px 0 14px; padding-top: 22px; border-top: 1px solid var(--gray-line);
+  font-size: 22px; color: var(--navy); scroll-margin-top: calc(var(--header-h) + 16px);
+}
+.case-view__body h3:first-child { margin-top: 0; }
+.case-view__body h4 { margin: 28px 0 8px; font-size: 18px; color: var(--navy); }
+.case-view__body p, .case-view__body li { font-size: 16px; line-height: 1.85; color: #444; word-break: keep-all; }
+.case-view__body ul { margin: 12px 0; padding-left: 22px; list-style: disc; }
+.case-view__body ol { margin: 12px 0; padding-left: 22px; list-style: decimal; }
+.case-view__body li { margin: 6px 0; }
+.case-view__body strong { color: #222; }
+.case-view__result { margin: 14px 0 16px; padding: 16px 20px; border-left: 4px solid var(--navy); background: var(--gray-bg); }
+.case-view__result p { font-weight: 600; color: var(--navy); }
+.case-view__tbl { margin: 16px 0 20px; overflow-x: auto; }
+.case-view__body table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--navy); font-size: 15px; }
+.case-view__body th, .case-view__body td { padding: 12px 14px; border-bottom: 1px solid var(--gray-line); text-align: left; vertical-align: top; line-height: 1.7; }
+.case-view__body thead th { background: var(--gray-bg); color: var(--navy); }
+.case-view__body tbody td:first-child { width: 34%; font-weight: 600; color: var(--navy); }
+.case-view__faq dt { margin-top: 20px; font-size: 16.5px; font-weight: 700; color: var(--navy); }
+.case-view__faq dd { margin: 6px 0 0; font-size: 16px; line-height: 1.8; color: #444; }
+
+.case-view__note { margin-top: 40px; font-size: 13px; color: #888; }
+.case-view__nav .is-disabled { opacity: 0.35; pointer-events: none; }
+
+@media (max-width: 768px) {
+  .case-view__head .case-view__title { font-size: 24px; }
+  .case-view__lead { font-size: 16px; }
+  .case-view__body h3 { font-size: 20px; }
+  .case-view__body tbody td:first-child { width: 40%; }
+}

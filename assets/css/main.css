@@ -156,7 +156,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   ⑤ 성공사례 슬라이더
+   ⑤ 업무사례 슬라이더
    -------------------------------------------------------------------------- */
 .cases__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 44px; }
 .cases__nav { display: flex; gap: 8px; }

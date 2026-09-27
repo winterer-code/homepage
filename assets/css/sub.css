@@ -200,7 +200,7 @@
 .strength-item p { margin-top: 10px; font-size: 15.5px; line-height: 1.75; color: var(--gray-text); }
 
 /* --------------------------------------------------------------------------
-   4. 성공사례 : 필터 / 카드 / 페이지네이션 / 상세
+   4. 업무사례 : 필터 / 카드 / 페이지네이션 / 상세
    -------------------------------------------------------------------------- */
 .case-filter { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 44px; }
 .case-filter button {

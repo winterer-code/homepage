@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 <link rel="stylesheet" href="assets/css/common.css">
 <link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/cases.css">
 
 <!-- JSON-LD : 법률사무소 올본 (WebSite / WebPage / LegalService / Person) -->
 <script type="application/ld+json">
@@ -364,15 +365,14 @@
   </section>
 
   <!-- ============================================================
-       ⑤ 성공사례 슬라이더
+       ⑤ 업무사례 슬라이더
        ============================================================ -->
   <section class="section cases" aria-labelledby="casesTitle">
     <div class="container">
       <div class="cases__head" data-aos="fade-up">
         <div class="sec-head is-left" style="margin-bottom:0">
           <p class="sec-eyebrow">Case Studies</p>
-          <h2 class="sec-title" id="casesTitle">주요 <span class="pt">성공사례</span></h2>
-          <p class="sec-desc">의뢰인 정보가 특정되지 않도록 비실명·요약 처리하여 게재합니다.</p>
+          <h2 class="sec-title" id="casesTitle">주요 <span class="pt">업무사례</span></h2>
         </div>
         <div class="cases__nav">
           <button type="button" class="cases__prev" aria-label="이전 사례">
@@ -384,62 +384,32 @@
         </div>
       </div>
 
-      <!-- ※ 아래 사례는 구조 확인용 예시입니다. 실제 수임 사례로 교체하세요. -->
       <div class="swiper" data-aos="fade-up">
         <div class="swiper-wrapper">
-
-          <article class="swiper-slide case-slide">
-            <span class="tag tag--ip">지식재산권</span>
-            <h3 class="case-slide__result">특허침해금지 가처분 신청 인용</h3>
-            <p class="case-slide__desc">전자부품 제조사가 경쟁사의 제품이 자사 특허를 침해한다며 신청한 사건에서 청구항 해석과 기술적 대비표를 중심으로 주장을 구성하였습니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
-          <article class="swiper-slide case-slide">
-            <span class="tag">형사</span>
-            <h3 class="case-slide__result">영업비밀 침해 혐의 불송치 결정</h3>
-            <p class="case-slide__desc">이직 과정에서 기술자료를 유출했다는 혐의로 고소된 사안에서, 해당 자료의 비공지성·비밀관리성 요건 결여를 자료로 소명하였습니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
-          <article class="swiper-slide case-slide">
-            <span class="tag tag--ip">지식재산권</span>
-            <h3 class="case-slide__result">상표등록 무효심판에서 등록 유지</h3>
-            <p class="case-slide__desc">선사용 상표와 유사하다는 이유로 제기된 무효심판에서 지정상품의 거래 실정과 수요자 인식 자료를 제출하여 다투었습니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
-          <article class="swiper-slide case-slide">
-            <span class="tag">민사</span>
-            <h3 class="case-slide__result">공사대금 청구 소송 청구금액 상당 부분 인정</h3>
-            <p class="case-slide__desc">추가공사 범위와 기성고를 둘러싼 분쟁에서 현장 사진·작업일지 등 자료를 시계열로 정리해 입증 구조를 세웠습니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
-          <article class="swiper-slide case-slide">
-            <span class="tag">행정</span>
-            <h3 class="case-slide__result">영업정지 처분 취소 판결</h3>
-            <p class="case-slide__desc">처분 사유의 사실오인과 재량권 일탈·남용을 다투어 처분의 위법성을 주장한 행정소송 사건입니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
-          <article class="swiper-slide case-slide">
-            <span class="tag">가사</span>
-            <h3 class="case-slide__result">재산분할 기여도 주장 상당 부분 반영</h3>
-            <p class="case-slide__desc">혼인 기간 중 자산 형성 경위를 금융자료로 재구성하여 기여도를 구체적으로 특정한 이혼·재산분할 사건입니다.</p>
-            <p class="case-slide__foot"><a href="case-view.html" class="link-more">더보기</a></p>
-          </article>
-
+          <!-- CASES:START — 최신 업무사례 6건을 _tools/build_cases.py 가 자동으로 채웁니다. -->
+          <div class="swiper-slide">
+            <a class="case-slide-card ob-card" href="case-trademark-infringement-punitive-damages.html" data-cat="ip">
+              <span class="ob-card__band" aria-hidden="true"></span>
+              <span class="ob-card__body">
+                <span class="ob-card__cat">지식재산권</span>
+                <span class="ob-card__type">상표권 침해소송 · 원고 대리</span>
+                <strong class="ob-card__title">상표권 침해 인정 및<br>징벌적 손해배상 2배 인용</strong>
+                <span class="ob-card__rule" aria-hidden="true"></span>
+                <span class="ob-card__result"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg>상표권 침해·부정경쟁행위 인정</span>
+              </span>
+              <span class="ob-card__foot"><img src="assets/images/logo-full.png" alt="법률사무소 올본" width="141" height="32" loading="lazy"></span>
+            </a>
+          </div>
+          <!-- CASES:END -->
         </div>
       </div>
 
       <p class="disclaimer" data-aos="fade-up">
-        <strong>안내</strong> — 게재된 사례는 의뢰인이 특정되지 않도록 비실명 처리한 것이며,
-        <strong>개별 사건의 결과는 사안에 따라 달라질 수 있습니다.</strong>
+        <strong>안내</strong> — 개별 사건의 결과는 사실관계와 증거에 따라 달라질 수 있습니다.
       </p>
 
       <p style="text-align:center;margin-top:36px" data-aos="fade-up">
-        <a href="cases.html" class="btn btn--line">성공사례 전체 보기</a>
+        <a href="cases.html" class="btn btn--line">업무사례 전체 보기</a>
       </p>
     </div>
   </section>

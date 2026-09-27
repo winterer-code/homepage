@@ -98,7 +98,7 @@
         { label: "가사", href: "practice-family.html" }
       ]
     },
-    { key: "cases", label: "성공사례", href: "cases.html", sub: [] },
+    { key: "cases", label: "업무사례", href: "cases.html", sub: [] },
     {
       key: "consult", label: "상담안내", href: "consult.html",
       sub: [
@@ -200,7 +200,7 @@
       '<a href="about.html">법률사무소 올본</a>' +
       '<a href="attorney.html">대표 변호사 소개</a>' +
       '<a href="practice-criminal.html">업무분야</a>' +
-      '<a href="cases.html">성공사례</a>' +
+      '<a href="cases.html">업무사례</a>' +
       '<a href="consult.html">상담안내</a>' +
       "</nav></div></div>" +
 

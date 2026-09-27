@@ -1,6 +1,6 @@
 /* ==========================================================================
    법률사무소 올본 — main.js (메인 페이지 전용)
-   히어로 슬라이더 / 성공사례 슬라이더 (Swiper.js)
+   히어로 슬라이더 / 업무사례 슬라이더 (Swiper.js)
    ※ Swiper CDN 로드 실패 시에도 첫 슬라이드가 정상 노출되도록 폴백 처리
    ========================================================================== */
 (function () {
@@ -68,13 +68,13 @@
     heroEl.addEventListener("focusin", function () { heroSwiper.autoplay.stop(); });
   }
 
-  /* --------------------------- 성공사례 ---------------------------- */
+  /* --------------------------- 업무사례 ---------------------------- */
   if (document.querySelector(".cases .swiper")) {
     new Swiper(".cases .swiper", {
       slidesPerView: 1,
       spaceBetween: 20,
       speed: 600,
-      a11y: { containerMessage: "성공사례 슬라이드" },
+      a11y: { containerMessage: "업무사례 슬라이드" },
       navigation: { prevEl: ".cases__prev", nextEl: ".cases__next" },
       breakpoints: {
         768: { slidesPerView: 2, spaceBetween: 22 },
