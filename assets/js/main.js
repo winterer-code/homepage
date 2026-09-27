@@ -70,12 +70,18 @@
 
   /* --------------------------- 업무사례 ---------------------------- */
   if (document.querySelector(".cases .swiper")) {
+    var caseCount = document.querySelectorAll(".cases .swiper-slide").length;
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     new Swiper(".cases .swiper", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      speed: 600,
+      slidesPerView: 1.12,          /* 모바일: 다음 카드가 살짝 보이도록 */
+      spaceBetween: 16,
+      speed: 700,
+      loop: caseCount > 3,          /* 마지막 사례 뒤에 처음 사례로 자연스럽게 이어짐 */
+      /* 4초마다 자동으로 넘어감. 마우스를 올리면 잠시 멈추고, 손으로 넘긴 뒤에도 다시 자동 재생 */
+      autoplay: reduceMotion ? false : { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
       a11y: { containerMessage: "업무사례 슬라이드" },
       navigation: { prevEl: ".cases__prev", nextEl: ".cases__next" },
+      pagination: { el: ".cases__pagination", clickable: true },
       breakpoints: {
         768: { slidesPerView: 2, spaceBetween: 22 },
         1025: { slidesPerView: 3, spaceBetween: 24 }

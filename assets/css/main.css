@@ -168,6 +168,9 @@
 .cases__nav button:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
 .cases__nav button.swiper-button-disabled { opacity: 0.35; cursor: default; }
 .cases__nav svg { width: 15px; height: 15px; fill: currentColor; }
+.cases__pagination { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+.cases__pagination .swiper-pagination-bullet { width: 8px; height: 8px; margin: 0 !important; background: #c9cfd9; opacity: 1; border-radius: 999px; transition: width var(--dur) var(--ease), background var(--dur) var(--ease); }
+.cases__pagination .swiper-pagination-bullet-active { width: 22px; background: var(--navy); }
 
 .case-slide {
   height: auto; display: flex; flex-direction: column;
