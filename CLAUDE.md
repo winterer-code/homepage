@@ -33,5 +33,7 @@ GitHub Pages로 배포되는 정적 사이트입니다. `main`에 푸시하면 �
 
 ## 기타
 
-- 공통 헤더·푸터는 `assets/js/layout.js`에서 관리한다(메뉴명 "업무사례").
+- 공통 헤더·푸터는 `assets/js/layout.js`에서 관리한다(메뉴명 "업무사례"). 검색엔진·AI 크롤러가 읽도록 빌드 때 `_tools/build_layout.py`가 각 HTML의 `<!-- LAYOUT:HEADER -->`·`<!-- LAYOUT:FOOTER -->` 구간에 미리 넣는다(node 필요). layout.js를 고치면 `python _tools/build_cases.py`를 실행해 전 페이지에 반영한다. 이 구간은 손으로 고치지 않는다.
+- 업무분야 페이지의 관련 업무사례(`<!-- RELATED -->` 구간)와 `llms.txt`도 build_cases.py가 자동 생성한다.
+- 페이지마다 h1은 하나: 서브페이지는 상단 제목(`subvisual__title`), 메인은 첫 슬라이드 제목, 사례 상세는 사례 제목.
 - 카드·상세 스타일은 `assets/css/cases.css`.

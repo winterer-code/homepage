@@ -44,6 +44,11 @@
 .case-grid .case-card.ob-card { padding: 0; border-radius: 14px; }
 .case-grid .case-card.ob-card:hover { transform: translateY(-4px); }
 
+/* 업무분야 페이지의 관련 업무사례 (본문 폭이 좁아 2열) */
+.case-grid.related-cases { grid-template-columns: repeat(2, 1fr); margin-top: 24px; }
+.case-grid.related-cases:not(:has(a)) { display: none; }
+@media (max-width: 767px) { .case-grid.related-cases { grid-template-columns: 1fr; } }
+
 /* 메인 슬라이더 */
 .cases .swiper-slide { height: auto; }
 
@@ -87,6 +92,8 @@
 .case-view__faq dd { margin: 6px 0 0; font-size: 16px; line-height: 1.8; color: #444; }
 
 .case-view__note { margin-top: 40px; font-size: 13px; color: #888; }
+.case-view__area { margin-top: 12px; font-size: 14.5px; color: var(--gray-text); }
+.case-view__area a { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .case-view__nav .is-disabled { opacity: 0.35; pointer-events: none; }
 
 @media (max-width: 768px) {

@@ -6,6 +6,9 @@ _cases/*.md 파일 하나가 업무사례 하나입니다. 이 스크립트를 �
   2) 업무사례 목록 카드 (cases.html)
   3) 메인 화면 업무사례 슬라이더 (index.html, 최신 6건)
   4) sitemap.xml
+  5) 업무분야 페이지의 관련 업무사례 카드 (practice-<분야>.html)
+  6) llms.txt (AI용 사이트 요약)
+  7) 모든 페이지의 공통 헤더·푸터 미리 넣기 (_tools/build_layout.py, node 필요)
 을 한 번에 다시 만듭니다. GitHub Actions(.github/workflows/build-cases.yml)가
 _cases 폴더가 바뀔 때마다 자동으로 실행합니다.
 
@@ -256,6 +259,8 @@ def detail_html(c, older, newer):
         )
         faq_html = f'<h3 id="faq">자주 묻는 질문</h3>\n<dl class="case-view__faq">{items}</dl>'
     note = f'<p class="case-view__note">{esc(c["note"])}</p>' if c.get("note") else ""
+    note += (f'\n        <p class="case-view__area">관련 업무분야 · '
+             f'<a href="practice-{c["category"]}.html">{CATEGORIES[c["category"]]}</a></p>')
     cta_title = esc(c.get("cta_title") or "비슷한 상황이신가요?")
     cta_desc = esc(c.get("cta_desc") or "자료를 보내주시면 검토 후 대응 방향을 말씀드립니다.")
 
@@ -435,7 +440,56 @@ def build():
         if text2 != text:
             sm.write_text(text2, encoding="utf-8")
 
+    # 업무분야 페이지마다 해당 분야 사례 카드 (<!-- RELATED:START --> … <!-- RELATED:END -->)
+    for cat in CATEGORIES:
+        page = ROOT / f"practice-{cat}.html"
+        if page.exists():
+            related = "\n\n".join(card_html(c) for c in cases if c["category"] == cat)
+            replace_block(page, "RELATED", indent(related, 12))
+
+    write_llms(cases)
+
     print(f"업무사례 {len(cases)}건 반영 완료: " + ", ".join(c["url_path"] for c in cases))
+
+    # 공통 헤더·푸터를 모든 페이지 원본 HTML에 미리 넣기 (검색엔진·AI 크롤러용)
+    import build_layout
+    build_layout.build()
+
+
+# --------------------------------------------------------------------------
+# 5. llms.txt — AI가 사이트를 요약해 읽을 수 있도록 주요 페이지와 사례 목록 제공
+# --------------------------------------------------------------------------
+def write_llms(cases):
+    lines = [
+        "# 법률사무소 올본 (OLBON LAW OFFICE)",
+        "",
+        "> 서울 강남구 테헤란로 138 성홍타워 4층(2호선 역삼역 3번 출구 도보 1분)에 있는 법률사무소입니다. "
+        "대표 변호사 김재훈(변호사·변리사)이 형사·지식재산권·민사·행정·가사 사건을 상담부터 종결까지 직접 수행합니다.",
+        "",
+        "- 대표 변호사: 김재훈 (변호사 시험 제9회, 변리사 시험 제49회, 연세대 전기전자공학과, 서강대 법학전문대학원)",
+        "- 이전 소속: 리앤목 특허법인, 리인터내셔널 특허법률사무소, 법무법인 테헤란, 법무법인(유한) 동인 형사팀, 법무법인(유) 지평 IPIT그룹",
+        "- 상담: 카카오톡 오픈채팅, 이메일 jhkim@olbonlaw.com (방문 상담 사전 예약제)",
+        "",
+        "## 주요 페이지",
+        f"- [사무소 소개]({SITE}/about.html): 인사말과 사무소 운영 원칙",
+        f"- [대표 변호사 소개]({SITE}/attorney.html): 학력, 자격, 경력, 대외활동",
+        f"- [업무사례 목록]({SITE}/cases.html): 실제 수행 사건을 분야별로 정리",
+        f"- [상담 안내]({SITE}/consult.html): 상담 절차, 방법, 자주 묻는 질문",
+        f"- [오시는 길]({SITE}/location.html): 위치와 교통",
+        "",
+        "## 업무분야",
+    ]
+    for cat, name in CATEGORIES.items():
+        lines.append(f"- [{name}]({SITE}/practice-{cat}.html)")
+    lines += ["", "## 업무사례"]
+    for c in cases:
+        desc = (c.get("description") or c.get("lead", "")).strip()
+        lines.append(f"- [{c['title']}]({SITE}/{c['url_path']}): {desc}")
+    lines.append("")
+    out = ROOT / "llms.txt"
+    text = "\n".join(lines)
+    if not out.exists() or out.read_text(encoding="utf-8") != text:
+        out.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":

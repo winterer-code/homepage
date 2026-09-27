@@ -4,6 +4,10 @@
    · file:// 로 열어도 동작하도록 fetch(include) 대신 JS 템플릿 주입 방식 사용
    · 사용법: 각 페이지 <body data-page="키값"> 지정 후
      <div id="header"></div> ... <div id="footer"></div> 배치 + 이 파일 로드
+   · 게시할 때는 _tools/build_layout.py 가 이 파일로 만든 헤더·푸터를 각 HTML에
+     미리 넣어 둡니다(검색엔진·AI 크롤러가 스크립트 없이도 메뉴와 사무소 정보를 읽도록).
+     이미 들어 있으면 아래 '주입' 단계는 건너뜁니다. 이 파일을 고친 뒤에는
+     python _tools/build_cases.py 를 실행하면 모든 페이지에 다시 반영됩니다.
    ========================================================================== */
 (function () {
   "use strict";
@@ -135,7 +139,7 @@
       '<a href="#main" class="skip-link">본문 바로가기</a>' +
       '<header class="header" id="siteHeader">' +
       '<div class="header__inner">' +
-      '<h1 class="header__logo">' + logoHtml(false) + "</h1>" +
+      '<div class="header__logo">' + logoHtml(false) + "</div>" +
       '<nav class="gnb-wrap" aria-label="주 메뉴"><ul class="gnb">' + gnbHtml() + "</ul></nav>" +
       '<div class="header__util">' +
       '<a href="' + SITE.kakaoUrl + '" class="header__tel" target="_blank" rel="noopener">' + ICON.chat +
@@ -240,8 +244,9 @@
     if (el) el.outerHTML = html;
   }
 
-  inject("header", headerHtml() + mnavHtml() + quickHtml());
-  inject("footer", footerHtml());
+  // 빌드 단계에서 미리 들어간 경우(siteHeader 존재)에는 다시 넣지 않음
+  if (!document.getElementById("siteHeader")) inject("header", headerHtml() + mnavHtml() + quickHtml());
+  if (!document.querySelector("footer.footer")) inject("footer", footerHtml());
 
   // 다른 스크립트에서 참조할 수 있도록 노출
   window.OLBON_SITE = SITE;
