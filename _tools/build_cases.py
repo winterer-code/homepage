@@ -2,12 +2,18 @@
 """법률사무소 올본 — 업무사례 자동 생성기
 
 _cases/*.md 파일 하나가 업무사례 하나입니다. 이 스크립트를 실행하면
-  1) 사례별 상세 페이지 (case-<slug>.html)
+  1) 사례별 상세 페이지 (case-<분야>-<번호>.html, 예: case-ip-001.html)
   2) 업무사례 목록 카드 (cases.html)
   3) 메인 화면 업무사례 슬라이더 (index.html, 최신 6건)
   4) sitemap.xml
 을 한 번에 다시 만듭니다. GitHub Actions(.github/workflows/build-cases.yml)가
 _cases 폴더가 바뀔 때마다 자동으로 실행합니다.
+
+주소(번호) 규칙
+  · 새 사례에는 분야별 다음 번호가 자동으로 붙고, 그 번호가 .md 머리말의 id 에 기록됩니다.
+  · 한 번 발급된 번호는 _tools/issued_ids.txt 에 남아 다시 쓰이지 않습니다(사례를 지워도).
+  · 나중에 분야(category)를 바꿔도 id(주소)는 그대로 유지됩니다.
+  · 예전 주소는 머리말 aliases 에 적으면 새 주소로 이동하는 안내 페이지가 만들어집니다.
 
 사용법:  python _tools/build_cases.py
 필요 패키지:  pip install markdown pyyaml
@@ -16,7 +22,6 @@ import html
 import json
 import re
 import sys
-from datetime import date
 from pathlib import Path
 
 import markdown
@@ -56,8 +61,38 @@ esc = html.escape
 # --------------------------------------------------------------------------
 # 1. 사례 파일 읽기
 # --------------------------------------------------------------------------
+LEDGER = ROOT / "_tools" / "issued_ids.txt"
+ID_RE = re.compile(r"^(" + "|".join(CATEGORIES) + r")-(\d{3,})$")
+
+
+def read_ledger():
+    if not LEDGER.exists():
+        return set()
+    return {ln.strip() for ln in LEDGER.read_text(encoding="utf-8").splitlines()
+            if ln.strip() and not ln.startswith("#")}
+
+
+def write_ledger(ids):
+    head = ("# 발급된 업무사례 번호 목록 — 자동 관리됩니다. 번호는 다시 쓰지 않으므로 지우지 마세요.\n")
+    LEDGER.write_text(head + "\n".join(sorted(ids)) + "\n", encoding="utf-8")
+
+
+def next_id(category, issued):
+    nums = [int(ID_RE.match(i).group(2)) for i in issued
+            if ID_RE.match(i) and ID_RE.match(i).group(1) == category]
+    return f"{category}-{(max(nums) + 1 if nums else 1):03d}"
+
+
+def stamp_id(path, new_id):
+    """사례 .md 머리말 맨 위에 id 줄을 기록한다."""
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"^---\s*\n", f"---\nid: {new_id}\n", text, count=1)
+    path.write_text(text, encoding="utf-8")
+
+
 def load_cases():
-    cases = []
+    issued = read_ledger()
+    loaded = []
     for path in sorted(SRC.glob("*.md")):
         if path.name.startswith("_"):
             continue  # _TEMPLATE.md 등 견본 파일은 건너뜀
@@ -67,21 +102,50 @@ def load_cases():
             sys.exit(f"[오류] {path.name}: 맨 위 '---' 머리말(front matter)이 없습니다.")
         meta = yaml.safe_load(m.group(1)) or {}
         meta["body_md"] = m.group(2)
-        meta.setdefault("slug", path.stem)
+        meta["_file"] = path
+        loaded.append(meta)
+
+    # 이미 번호가 있는 사례 확인 (중복·형식)
+    seen = {}
+    for meta in loaded:
+        if meta.get("id"):
+            cid = str(meta["id"])
+            if not ID_RE.match(cid):
+                sys.exit(f"[오류] {meta['_file'].name}: id '{cid}' 형식이 잘못되었습니다 (예: ip-001).")
+            if cid in seen:
+                sys.exit(f"[오류] {meta['_file'].name}, {seen[cid]}: 같은 번호 {cid} 를 쓰고 있습니다.")
+            seen[cid] = meta["_file"].name
+            meta["id"] = cid
+            issued.add(cid)
+
+    cases = []
+    for meta in loaded:
+        name = meta["_file"].name
         if not meta.get("published", True):
-            continue
+            continue  # 임시 저장(비공개) 사례는 번호를 받지 않음
         for key in ("date", "category", "title", "card_title", "card_result", "summary"):
             if not meta.get(key):
-                sys.exit(f"[오류] {path.name}: '{key}' 항목이 비어 있습니다.")
+                sys.exit(f"[오류] {name}: '{key}' 항목이 비어 있습니다.")
         if meta["category"] not in CATEGORIES:
-            sys.exit(f"[오류] {path.name}: category는 {', '.join(CATEGORIES)} 중 하나여야 합니다.")
+            sys.exit(f"[오류] {name}: category는 {', '.join(CATEGORIES)} 중 하나여야 합니다.")
         meta["date"] = str(meta["date"])
         meta["updated"] = str(meta.get("updated") or meta["date"])
         if isinstance(meta["card_title"], str):
             meta["card_title"] = [meta["card_title"]]
-        meta["url_path"] = f"case-{meta['slug']}.html"
+        meta["aliases"] = [a for a in (meta.get("aliases") or []) if a]
         cases.append(meta)
-    cases.sort(key=lambda c: (c["date"], c["slug"]), reverse=True)
+
+    # 번호가 없는 새 사례: 게시일 → 파일 이름 순으로 분야별 다음 번호 발급
+    for meta in sorted((c for c in cases if not c.get("id")), key=lambda c: (c["date"], c["_file"].name)):
+        meta["id"] = next_id(meta["category"], issued)
+        issued.add(meta["id"])
+        stamp_id(meta["_file"], meta["id"])
+        print(f"새 번호 발급: {meta['_file'].name} → {meta['id']}")
+    write_ledger(issued)
+
+    for meta in cases:
+        meta["url_path"] = f"case-{meta['id']}.html"
+    cases.sort(key=lambda c: (c["date"], c["id"]), reverse=True)
     return cases
 
 
@@ -204,7 +268,7 @@ def detail_html(c, older, newer):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 이 파일은 _cases/{c['slug']}.md 에서 자동 생성됩니다. 직접 고치지 말고 원본 .md 를 수정하세요. -->
+<!-- 이 파일은 _cases/{c['_file'].name} 에서 자동 생성됩니다. 직접 고치지 말고 원본 .md 를 수정하세요. -->
 <title>{esc(c['title'])} | 업무사례 | 법률사무소 올본</title>
 <meta name="description" content="{esc(desc)}">
 <meta name="keywords" content="{esc(keywords)}">
@@ -319,6 +383,26 @@ def detail_html(c, older, newer):
 """
 
 
+def alias_html(c):
+    target = c["url_path"]
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- 예전 주소 안내 페이지 — _cases/{c['_file'].name} 의 aliases 에서 자동 생성됩니다. -->
+<title>페이지 주소가 변경되었습니다 | 법률사무소 올본</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="{SITE}/{target}">
+<meta http-equiv="refresh" content="0; url={target}">
+<script>location.replace("{target}" + location.hash);</script>
+</head>
+<body>
+<p>페이지 주소가 변경되었습니다. <a href="{target}">{esc(c['title'])}</a>(으)로 이동합니다.</p>
+</body>
+</html>
+"""
+
+
 # --------------------------------------------------------------------------
 # 4. 표시 구간 교체 (<!-- CASES:START --> … <!-- CASES:END -->)
 # --------------------------------------------------------------------------
@@ -341,7 +425,7 @@ def build():
     cases = load_cases()
 
     # 이전 빌드에서 만들어졌지만 지금은 없는(삭제·비공개) 상세 페이지 정리
-    live = {c["url_path"] for c in cases}
+    live = {c["url_path"] for c in cases} | {a for c in cases for a in c["aliases"]}
     for old in ROOT.glob("case-*.html"):
         if old.name not in live and "자동 생성됩니다" in old.read_text(encoding="utf-8")[:600]:
             old.unlink()
@@ -353,6 +437,13 @@ def build():
         page = detail_html(c, older, newer)
         if not out.exists() or out.read_text(encoding="utf-8") != page:
             out.write_text(page, encoding="utf-8")
+        for alias in c["aliases"]:
+            stub = ROOT / alias
+            if stub.resolve().parent != ROOT or not alias.endswith(".html"):
+                sys.exit(f"[오류] {c['_file'].name}: aliases 는 'case-예전이름.html' 형식이어야 합니다.")
+            page = alias_html(c)
+            if not stub.exists() or stub.read_text(encoding="utf-8") != page:
+                stub.write_text(page, encoding="utf-8")
 
     cards = "\n\n".join(card_html(c) for c in cases)
     replace_block(ROOT / "cases.html", "CASES", indent(cards, 8))

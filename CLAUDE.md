@@ -7,12 +7,19 @@ GitHub Pages로 배포되는 정적 사이트입니다. `main`에 푸시하면 �
 
 대표님이 판결문·결정문 등을 주고 "올려줘"라고 하면 아래 순서로 처리한다.
 
-1. 자료를 읽고 사례 원고를 `_cases/<slug>.md`로 작성한다. 형식은 `_cases/_TEMPLATE.md`를 따른다.
-2. `python _tools/build_cases.py` 실행 → `case-<slug>.html`, `cases.html` 카드, `index.html` 슬라이더, `sitemap.xml`이 자동 갱신된다. 이 네 곳은 손으로 고치지 않는다.
+1. 자료를 읽고 사례 원고를 `_cases/<분야>-<키워드>.md`로 작성한다. 형식은 `_cases/_TEMPLATE.md`를 따른다. `id`는 적지 않는다.
+2. `python _tools/build_cases.py` 실행 → 분야별 다음 번호(`id`)가 .md에 기록되고 `case-<id>.html`, `cases.html` 카드, `index.html` 슬라이더, `sitemap.xml`이 자동 갱신된다. 이 네 곳은 손으로 고치지 않는다.
 3. 로컬에서 렌더링해 확인한 뒤, 게시 전에 초안을 대표님께 보여 주고 승인을 받는다.
 4. 커밋·푸시 후 1~2분 뒤 실제 페이지를 열어 반영을 확인한다.
 
 `_cases`에 .md만 올려도 GitHub Actions(`build-cases.yml`)가 2번을 대신 수행한다.
+
+## 상세 페이지 주소 규칙
+
+- 형식: `case-<분야코드>-<세 자리 번호>.html` (예: `case-ip-001.html`). 분야코드: criminal 형사, ip 지식재산권, civil 민사, admin 행정, family 가사.
+- 번호는 분야별로 자동 발급되며 `_tools/issued_ids.txt`에 기록된다. 삭제된 사례의 번호도 재사용하지 않는다. 이 파일은 지우거나 고치지 않는다.
+- 게시 후 `category`를 바꿔도 `id`(주소)는 바꾸지 않는다.
+- 주소를 옮길 일이 생기면 예전 파일명을 `aliases`에 적는다 → 새 주소로 이동하는 안내 페이지가 자동 생성된다.
 
 ## 사례 작성 원칙 (반드시 지킬 것)
 

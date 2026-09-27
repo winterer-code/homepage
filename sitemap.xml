@@ -68,7 +68,7 @@
   </url>
   <!-- CASES:START — 업무사례 상세 페이지는 _tools/build_cases.py 가 자동으로 채웁니다. -->
   <url>
-    <loc>https://www.olbonlaw.com/case-trademark-infringement-punitive-damages.html</loc>
+    <loc>https://www.olbonlaw.com/case-ip-001.html</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
