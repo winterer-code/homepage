@@ -388,7 +388,7 @@ def replace_block(path, marker, content):
     pat = re.compile(rf"(<!-- {marker}:START[^>]*-->)(.*?)(\s*<!-- {marker}:END -->)", re.S)
     if not pat.search(text):
         sys.exit(f"[오류] {path.name}: <!-- {marker}:START --> 표시를 찾지 못했습니다.")
-    new = pat.sub(lambda m: m.group(1) + "\n" + content + m.group(3), text)
+    new = pat.sub(lambda m: m.group(1) + "\n" + content + "\n" + m.group(3).lstrip("\n"), text)
     if new != text:
         path.write_text(new, encoding="utf-8")
 
