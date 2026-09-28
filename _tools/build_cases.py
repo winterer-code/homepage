@@ -8,6 +8,7 @@ _cases/*.md 파일 하나가 업무사례 하나입니다. 이 스크립트를 �
   4) sitemap.xml
   5) 업무분야 페이지의 관련 업무사례 카드 (practice-<분야>.html)
   6) llms.txt (AI용 사이트 요약)
+  6-1) feed.xml (업무사례 RSS — 네이버 서치어드바이저 RSS 제출용)
   7) 모든 페이지의 공통 헤더·푸터 미리 넣기 (_tools/build_layout.py, node 필요)
 을 한 번에 다시 만듭니다. GitHub Actions(.github/workflows/build-cases.yml)가
 _cases 폴더가 바뀔 때마다 자동으로 실행합니다.
@@ -43,6 +44,7 @@ CATEGORIES = {
 HOME_SLIDES = 6
 
 AUTHOR = {"name": "김재훈", "title": "대표 변호사 · 변리사", "url": SITE + "/attorney.html"}
+BLOG = "https://blog.naver.com/law_jhk"
 KAKAO = "https://open.kakao.com/o/syCkuapi"
 MAIL = ("mailto:jhkim@olbonlaw.com?subject=%5B%EC%83%81%EB%8B%B4%20%EB%AC%B8%EC%9D%98%5D&body="
         "%EC%84%B1%ED%95%A8%20%3A%20%0A%EC%97%B0%EB%9D%BD%EC%B2%98%20%3A%20%0A%EC%83%81%EB%8B%B4%20"
@@ -137,6 +139,11 @@ def load_cases():
             if a not in CATEGORIES:
                 sys.exit(f"[오류] {name}: also_in은 {', '.join(CATEGORIES)} 중에서 골라야 합니다.")
         meta["also_in"] = [a for a in also if a != meta["category"]]
+        blog = meta.get("blog") or []
+        for b in blog:
+            if not isinstance(b, dict) or not b.get("title") or not str(b.get("url", "")).startswith("https://"):
+                sys.exit(f"[오류] {name}: blog 항목은 '- title: 글 제목' / '  url: https://...' 형식이어야 합니다.")
+        meta["blog"] = blog
         meta["date"] = str(meta["date"])
         meta["updated"] = str(meta.get("updated") or meta["date"])
         if isinstance(meta["card_title"], str):
@@ -210,9 +217,11 @@ def jsonld(c, canonical):
             "inLanguage": "ko",
             "image": SITE + "/assets/images/og-image.jpg",
             "keywords": ", ".join(c.get("keywords", [])),
-            "author": {"@type": "Person", "name": AUTHOR["name"], "jobTitle": AUTHOR["title"], "url": AUTHOR["url"]},
+            "author": {"@type": "Person", "@id": SITE + "/#kimjaehoon", "name": AUTHOR["name"],
+                       "jobTitle": AUTHOR["title"], "url": AUTHOR["url"], "sameAs": [BLOG]},
             "publisher": {
                 "@type": "LegalService",
+                "@id": SITE + "/#office",
                 "name": "법률사무소 올본",
                 "url": SITE + "/",
                 "logo": {"@type": "ImageObject", "url": SITE + "/assets/images/logo-full.png"},
@@ -228,6 +237,8 @@ def jsonld(c, canonical):
             ],
         },
     ]
+    if c.get("blog"):
+        graph[0]["relatedLink"] = [b["url"] for b in c["blog"]]
     if c.get("faq"):
         graph.append({
             "@type": "FAQPage",
@@ -264,6 +275,14 @@ def detail_html(c, older, newer):
             f"<dt>Q. {esc(f['q'])}</dt><dd>{esc(f['a'])}</dd>" for f in faq
         )
         faq_html = f'<h3 id="faq">자주 묻는 질문</h3>\n<dl class="case-view__faq">{items}</dl>'
+    blog_html = ""
+    if c.get("blog"):
+        items = "".join(
+            f'<li><a href="{esc(b["url"])}" target="_blank" rel="noopener">{esc(b["title"])}</a></li>'
+            for b in c["blog"]
+        )
+        blog_html = (f'<aside class="case-view__blog" aria-label="관련 해설 글">'
+                     f'<strong>이 사례를 쟁점별로 풀어 쓴 글 (네이버 블로그)</strong><ul>{items}</ul></aside>')
     note = f'<p class="case-view__note">{esc(c["note"])}</p>' if c.get("note") else ""
     note += (f'\n        <p class="case-view__area">관련 업무분야 · '
              f'<a href="practice-{c["category"]}.html">{CATEGORIES[c["category"]]}</a></p>')
@@ -281,6 +300,7 @@ def detail_html(c, older, newer):
 <meta name="keywords" content="{esc(keywords)}">
 <meta name="author" content="변호사·변리사 김재훈">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" type="application/rss+xml" title="법률사무소 올본 업무사례" href="{SITE}/feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="법률사무소 올본">
 <meta property="og:title" content="{esc(c['title'])}">
@@ -351,6 +371,8 @@ def detail_html(c, older, newer):
 {body}
 {faq_html}
         </div>
+
+        {blog_html}
 
         {note}
 
@@ -455,6 +477,7 @@ def build():
             replace_block(page, "RELATED", indent(related, 12))
 
     write_llms(cases)
+    write_feed(cases)
 
     print(f"업무사례 {len(cases)}건 반영 완료: " + ", ".join(c["url_path"] for c in cases))
 
@@ -476,6 +499,7 @@ def write_llms(cases):
         "- 대표 변호사: 김재훈 (변호사 시험 제9회, 변리사 시험 제49회, 연세대 전기전자공학과, 서강대 법학전문대학원)",
         "- 이전 소속: 리앤목 특허법인, 리인터내셔널 특허법률사무소, 법무법인 테헤란, 법무법인(유한) 동인 형사팀, 법무법인(유) 지평 IPIT그룹",
         "- 상담: 카카오톡 오픈채팅, 이메일 jhkim@olbonlaw.com (방문 상담 사전 예약제)",
+        f"- 네이버 블로그: {BLOG} (업무사례의 쟁점별 해설 글)",
         "",
         "## 주요 페이지",
         f"- [사무소 소개]({SITE}/about.html): 인사말과 사무소 운영 원칙",
@@ -495,6 +519,44 @@ def write_llms(cases):
     lines.append("")
     out = ROOT / "llms.txt"
     text = "\n".join(lines)
+    if not out.exists() or out.read_text(encoding="utf-8") != text:
+        out.write_text(text, encoding="utf-8")
+
+
+# --------------------------------------------------------------------------
+# 6. feed.xml — 업무사례 RSS (네이버 서치어드바이저 'RSS 제출'에 등록)
+# --------------------------------------------------------------------------
+def write_feed(cases):
+    from email.utils import format_datetime
+    from datetime import datetime, timezone, timedelta
+    kst = timezone(timedelta(hours=9))
+
+    def rfc822(d):
+        return format_datetime(datetime.fromisoformat(d).replace(hour=9, tzinfo=kst))
+
+    items = []
+    for c in cases:
+        url = f"{SITE}/{c['url_path']}"
+        desc = (c.get("description") or c.get("lead", "")).strip()
+        cats = "".join(f"<category>{esc(CATEGORIES[x])}</category>" for x in [c["category"]] + c.get("also_in", []))
+        items.append(
+            f"    <item>\n      <title>{esc(c['title'])}</title>\n      <link>{url}</link>\n"
+            f"      <guid isPermaLink=\"true\">{url}</guid>\n      <pubDate>{rfc822(c['date'])}</pubDate>\n"
+            f"      {cats}\n      <description>{esc(desc)}</description>\n    </item>"
+        )
+    last = max((c["updated"] for c in cases), default="2026-01-01")
+    text = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n'
+        "    <title>법률사무소 올본 업무사례</title>\n"
+        f"    <link>{SITE}/cases.html</link>\n"
+        f'    <atom:link href="{SITE}/feed.xml" rel="self" type="application/rss+xml"/>\n'
+        "    <description>변호사·변리사 김재훈이 수행한 형사·지식재산권·민사·행정·가사 사건을 쟁점별로 정리한 업무사례</description>\n"
+        "    <language>ko</language>\n"
+        f"    <lastBuildDate>{rfc822(last)}</lastBuildDate>\n"
+        + "\n".join(items) + "\n  </channel>\n</rss>\n"
+    )
+    out = ROOT / "feed.xml"
     if not out.exists() or out.read_text(encoding="utf-8") != text:
         out.write_text(text, encoding="utf-8")
 

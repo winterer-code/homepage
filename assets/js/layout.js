@@ -22,12 +22,12 @@
        전화·팩스 항목은 사용하지 않으므로 두지 않습니다. */
     email: "jhkim@olbonlaw.com",
     address: "서울 강남구 테헤란로 138 성홍타워 4층",
-    bizNo: "[사업자등록번호]",       // TODO: 실제 사업자등록번호 입력
+    bizNo: "",                       // 사업자등록번호 (예: "123-45-67890"). 비워 두면 푸터에 표시하지 않음
     ceo: "김재훈",
     hours: "평일 09:00 ~ 18:00 (점심 12:00~13:00)",
     kakaoUrl: "https://open.kakao.com/o/syCkuapi",
     naverUrl: "https://blog.naver.com/law_jhk",
-    naverMapUrl: "https://map.naver.com/p/search/%EB%93%9C%EB%A6%AC%EC%9B%80/place/1201398814?c=15.00,0,0,0,dh&placePath=%2Fhome%3Fbk_query%3D%EB%93%9C%EB%A6%AC%EC%9B%80%26entry%3Dbmp%26from%3Dmap%26fromPanelNum%3D2%26timestamp%3D202608280958%26locale%3Dko%26svcName%3Dmap_pcv5%26searchText%3D%EB%93%9C%EB%A6%AC%EC%9B%80",
+    naverMapUrl: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138",  // TODO: 스마트플레이스 등록 후 플레이스 주소로 교체,
     zip: "06236",
     /* 이메일 상담 — 제목과 양식이 채워진 채로 메일 창이 열립니다 */
     mailHref: "mailto:jhkim@olbonlaw.com?subject=" + encodeURIComponent("[상담 문의]") +
@@ -213,13 +213,14 @@
       logoHtml(true) +
       "<dl>" +
       "<div><dt>대표변호사</dt><dd>" + SITE.ceo + "</dd></div>" +
-      "<div><dt>사업자등록번호</dt><dd>" + SITE.bizNo + "</dd></div>" +
+      (SITE.bizNo ? "<div><dt>사업자등록번호</dt><dd>" + SITE.bizNo + "</dd></div>" : "") +
+      "<div><dt>광고책임변호사</dt><dd>" + SITE.ceo + "</dd></div>" +
       "<div><dt>주소</dt><dd>" + SITE.address + "</dd></div>" +
       "<div><dt>이메일</dt><dd>" + SITE.email + "</dd></div>" +
       "</dl>" +
       '<p class="footer__notice">본 웹사이트에 게시된 내용은 일반적인 법률 정보 제공을 목적으로 하며, 개별 사건에 대한 법률 자문이 아닙니다. ' +
       "게재된 사례의 결과는 해당 사안의 구체적 사정에 따른 것으로 다른 사건에서 동일한 결과를 보장하지 않습니다. " +
-      "본 사이트는 대한변호사협회 변호사업무광고규정을 준수합니다.</p>" +
+      "본 사이트는 대한변호사협회 「변호사 광고에 관한 규정」을 준수합니다.</p>" +
       '<p class="footer__copy">&copy; ' + y + " " + SITE.nameKo + " (" + SITE.nameEn + "). All rights reserved.</p>" +
       "</div>" +
 

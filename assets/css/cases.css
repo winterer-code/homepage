@@ -89,6 +89,13 @@
 .case-view__faq dt { margin-top: 20px; font-size: 16.5px; font-weight: 700; color: var(--navy); }
 .case-view__faq dd { margin: 6px 0 0; font-size: 16px; line-height: 1.8; color: #444; }
 
+.case-view__blog { margin: 44px 0 0; padding: 18px 22px; border: 1px solid var(--gray-line); border-left: 4px solid var(--gold); border-radius: var(--r-md); }
+.case-view__blog strong { display: block; font-size: 15px; color: var(--navy); }
+.case-view__blog ul { margin: 8px 0 0; padding-left: 20px; list-style: disc; }
+.case-view__blog li { margin: 4px 0; font-size: 15.5px; line-height: 1.7; }
+.case-view__blog a { color: #333; text-decoration: underline; text-underline-offset: 3px; }
+.case-view__blog a:hover { color: var(--navy); }
+
 .case-view__note { margin-top: 40px; font-size: 13px; color: #888; }
 .case-view__area { margin-top: 12px; font-size: 14.5px; color: var(--gray-text); }
 .case-view__area a { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
