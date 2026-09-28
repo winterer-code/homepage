@@ -1,0 +1,35 @@
+# 사이트가 바뀌면 IndexNow로 Bing·네이버 등 검색엔진에 바로 알립니다.
+# (ChatGPT·Copilot이 참고하는 Bing 색인을 빨리 갱신하기 위한 설정)
+# 키 파일: /65c8d2ca2633c0fb6802202417339072.txt — 지우거나 이름을 바꾸지 마세요.
+name: 검색엔진에 변경 알림 (IndexNow)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - "sitemap.xml"
+      - "feed.xml"
+      - "llms.txt"
+      - ".github/workflows/indexnow.yml"
+  workflow_run:
+    workflows: ["업무사례 자동 반영"]
+    types: [completed]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: GitHub Pages 배포 대기
+        run: sleep 120
+      - name: sitemap 주소 전체를 IndexNow에 제출
+        run: |
+          KEY=65c8d2ca2633c0fb6802202417339072
+          URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<[^>]*>//g' | python3 -c 'import sys,json;print(json.dumps([u.strip() for u in sys.stdin if u.strip()]+["https://www.olbonlaw.com/feed.xml"]))')
+          BODY=$(printf '{"host":"www.olbonlaw.com","key":"%s","keyLocation":"https://www.olbonlaw.com/%s.txt","urlList":%s}' "$KEY" "$KEY" "$URLS")
+          for EP in https://api.indexnow.org/indexnow https://www.bing.com/indexnow https://searchadvisor.naver.com/indexnow; do
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$EP" -H 'Content-Type: application/json; charset=utf-8' -d "$BODY")
+            echo "$EP -> $CODE"
+          done

@@ -37,6 +37,7 @@ GitHub Pages로 배포되는 정적 사이트입니다. `main`에 푸시하면 �
 - 블로그: https://blog.naver.com/law_jhk. 홈페이지 사례가 원본, 블로그는 사례 1건을 검색 질문 2~3개로 나눈 해설 글(문장을 새로 쓴다. 그대로 복사하면 유사문서로 한쪽이 누락될 수 있음).
 - 블로그 글을 올리면 해당 사례 .md에 `blog:`(title·url)를 추가하고 빌드한다 → 상세 페이지 하단에 "이 사례를 쟁점별로 풀어 쓴 글" 목록과 JSON-LD `relatedLink`가 생긴다. 블로그 글 끝에는 홈페이지 원문 사례 주소를 넣는다.
 - `feed.xml`(업무사례 RSS)은 build_cases.py가 자동 생성한다. 네이버 서치어드바이저 'RSS 제출'에 등록한다.
+- `main`에 HTML·sitemap이 바뀌어 푸시되면 `.github/workflows/indexnow.yml`이 IndexNow(Bing·네이버 등)에 sitemap 주소 전체를 자동 제출한다. 루트의 키 파일(`65c8d2ca2633c0fb6802202417339072.txt`)은 지우지 않는다.
 - 사업자등록번호는 `assets/js/layout.js`의 `bizNo`에 넣는다(비우면 푸터에서 숨김). 네이버 스마트플레이스 등록 후 `naverMapUrl`과 index.html·location.html의 지도 링크를 플레이스 주소로 바꾼다.
 
 ## 기타
