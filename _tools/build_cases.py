@@ -45,7 +45,7 @@ HOME_SLIDES = 6
 
 AUTHOR = {"name": "김재훈", "title": "대표 변호사 · 변리사", "url": SITE + "/attorney.html"}
 BLOG = "https://blog.naver.com/law_jhk"
-KAKAO = "https://open.kakao.com/o/syCkuapi"
+KAKAO = "https://open.kakao.com/o/sblxZ3Ki"
 MAIL = ("mailto:jhkim@olbonlaw.com?subject=%5B%EC%83%81%EB%8B%B4%20%EB%AC%B8%EC%9D%98%5D&body="
         "%EC%84%B1%ED%95%A8%20%3A%20%0A%EC%97%B0%EB%9D%BD%EC%B2%98%20%3A%20%0A%EC%83%81%EB%8B%B4%20"
         "%EB%B6%84%EC%95%BC%20%3A%20%0A%0A%5B%EC%82%AC%EA%B1%B4%20%EA%B2%BD%EC%9C%84%5D%0A%0A%0A%E2"

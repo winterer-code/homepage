@@ -25,7 +25,7 @@
     bizNo: "",                       // 사업자등록번호 (예: "123-45-67890"). 비워 두면 푸터에 표시하지 않음
     ceo: "김재훈",
     hours: "평일 09:00 ~ 18:00 (점심 12:00~13:00)",
-    kakaoUrl: "https://open.kakao.com/o/syCkuapi",
+    kakaoUrl: "https://open.kakao.com/o/sblxZ3Ki",
     naverUrl: "https://blog.naver.com/law_jhk",
     naverMapUrl: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138",  // TODO: 스마트플레이스 등록 후 플레이스 주소로 교체,
     zip: "06236",
