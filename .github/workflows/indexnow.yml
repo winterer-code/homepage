@@ -30,6 +30,6 @@ jobs:
           URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<[^>]*>//g' | python3 -c 'import sys,json;print(json.dumps([u.strip() for u in sys.stdin if u.strip()]+["https://www.olbonlaw.com/feed.xml"]))')
           BODY=$(printf '{"host":"www.olbonlaw.com","key":"%s","keyLocation":"https://www.olbonlaw.com/%s.txt","urlList":%s}' "$KEY" "$KEY" "$URLS")
           for EP in https://api.indexnow.org/indexnow https://www.bing.com/indexnow https://searchadvisor.naver.com/indexnow; do
-            CODE=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$EP" -H 'Content-Type: application/json; charset=utf-8' -d "$BODY")
-            echo "$EP -> $CODE"
+            CODE=$(curl -s -o /tmp/resp.txt -w '%{http_code}' -X POST "$EP" -H 'Content-Type: application/json; charset=utf-8' -d "$BODY")
+            echo "::notice title=IndexNow::$EP -> HTTP $CODE $(head -c 200 /tmp/resp.txt | tr '\n' ' ')"
           done
