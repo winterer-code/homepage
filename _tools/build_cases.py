@@ -130,6 +130,13 @@ def load_cases():
                 sys.exit(f"[오류] {name}: '{key}' 항목이 비어 있습니다.")
         if meta["category"] not in CATEGORIES:
             sys.exit(f"[오류] {name}: category는 {', '.join(CATEGORIES)} 중 하나여야 합니다.")
+        also = meta.get("also_in") or []
+        if isinstance(also, str):
+            also = [also]
+        for a in also:
+            if a not in CATEGORIES:
+                sys.exit(f"[오류] {name}: also_in은 {', '.join(CATEGORIES)} 중에서 골라야 합니다.")
+        meta["also_in"] = [a for a in also if a != meta["category"]]
         meta["date"] = str(meta["date"])
         meta["updated"] = str(meta.get("updated") or meta["date"])
         if isinstance(meta["card_title"], str):
@@ -156,8 +163,9 @@ def load_cases():
 def card_html(c, extra_class="case-card"):
     title = "<br>".join(esc(line) for line in c["card_title"])
     cat = c["category"]
+    cats = " ".join([cat] + c.get("also_in", []))
     return (
-        f'<a class="{extra_class} ob-card" href="{c["url_path"]}" data-cat="{cat}">\n'
+        f'<a class="{extra_class} ob-card" href="{c["url_path"]}" data-cat="{cat}" data-cats="{cats}">\n'
         f'  <span class="ob-card__band" aria-hidden="true"></span>\n'
         f'  <span class="ob-card__body">\n'
         f'    <span class="ob-card__cat">{CATEGORIES[cat]}</span>\n'
@@ -442,7 +450,8 @@ def build():
     for cat in CATEGORIES:
         page = ROOT / f"practice-{cat}.html"
         if page.exists():
-            related = "\n\n".join(card_html(c) for c in cases if c["category"] == cat)
+            related = "\n\n".join(card_html(c) for c in cases
+                                    if c["category"] == cat or cat in c.get("also_in", []))
             replace_block(page, "RELATED", indent(related, 12))
 
     write_llms(cases)

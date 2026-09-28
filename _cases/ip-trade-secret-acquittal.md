@@ -3,6 +3,7 @@ id: ip-004
 published: true
 date: 2026-09-28
 category: ip
+also_in: [criminal]
 case_type: 영업비밀 형사사건 · 피고인 변호
 title: 영업비밀 유출 및 상법상 특별배임 혐의 피고인 변호 - 무죄 확정
 card_title:

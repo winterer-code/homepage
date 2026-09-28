@@ -170,7 +170,9 @@
     function items() { return Array.prototype.slice.call(caseRoot.querySelectorAll(".case-card")); }
     function filtered() {
       return items().filter(function (el) {
-        return state.cat === "all" || el.getAttribute("data-cat") === state.cat;
+        if (state.cat === "all") return true;
+        var cats = (el.getAttribute("data-cats") || el.getAttribute("data-cat") || "").split(" ");
+        return cats.indexOf(state.cat) !== -1;
       });
     }
     function render() {

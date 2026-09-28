@@ -11,6 +11,7 @@ published: false
 date: 2026-01-01                   # 게시일
 # updated: 2026-02-01              # 내용을 고친 날 (선택)
 category: ip                       # criminal 형사 · ip 지식재산권 · civil 민사 · admin 행정 · family 가사
+# also_in: [criminal]             # (선택) 다른 분야에도 함께 표시 — 목록 필터·업무분야 관련 사례에 추가 노출, 주소는 그대로
 case_type: 특허침해소송 · 피고 대리  # 카드 윗줄 (사건 유형 · 대리 입장)
 title: 특허침해소송 피고 대리 - 권리범위 불포함 판단으로 청구 기각
 card_title:                        # 카드 가운데 큰 글씨 (2줄 권장)
