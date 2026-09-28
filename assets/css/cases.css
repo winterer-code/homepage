@@ -37,8 +37,6 @@
   font-size: 15px; font-weight: 600; color: var(--ob-navy); letter-spacing: -0.02em; word-break: keep-all;
 }
 .ob-card__result svg { width: 16px; height: 16px; flex: none; }
-.ob-card__foot { display: flex; justify-content: center; padding: 16px 0; background: #f7f8fb; border-top: 1px solid #eceff4; }
-.ob-card__foot img { height: 30px; width: auto; }
 
 /* 목록 페이지 — 기존 .case-card 스타일 덮어쓰기 */
 .case-grid .case-card.ob-card { padding: 0; border-radius: 14px; }

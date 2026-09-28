@@ -166,8 +166,6 @@ def card_html(c, extra_class="case-card"):
         f'    <span class="ob-card__rule" aria-hidden="true"></span>\n'
         f'    <span class="ob-card__result">{CHECK_SVG}{esc(c["card_result"])}</span>\n'
         f'  </span>\n'
-        f'  <span class="ob-card__foot"><img src="assets/images/logo-full.png" alt="법률사무소 올본" '
-        f'width="141" height="32" loading="lazy"></span>\n'
         f'</a>'
     )
 
