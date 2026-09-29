@@ -190,17 +190,15 @@ def card_html(c, extra_class="case-card"):
 # --------------------------------------------------------------------------
 def render_body(md_text):
     body = markdown.markdown(md_text, extensions=["tables", "sane_lists"])
-    # 사이트 제목 구조에 맞춰 한 단계씩 내림: ## → h3, ### → h4
-    body = re.sub(r"<(/?)h3>", r"<\1h4>", body)
-    body = re.sub(r"<(/?)h2>", r"<\1h3>", body)
+    # 제목 구조: 사례 제목 h1 → 본문 ## 은 h2, ### 은 h3 (단계를 건너뛰지 않음)
     toc = []
 
     def add_id(m):
         n = len(toc) + 1
         toc.append((f"s{n}", re.sub("<[^>]+>", "", m.group(1))))
-        return f'<h3 id="s{n}">{m.group(1)}</h3>'
+        return f'<h2 id="s{n}">{m.group(1)}</h2>'
 
-    body = re.sub(r"<h3>(.*?)</h3>", add_id, body)
+    body = re.sub(r"<h2>(.*?)</h2>", add_id, body)
     body = body.replace("<blockquote>", '<blockquote class="case-view__result">')
     body = body.replace("<table>", '<div class="case-view__tbl"><table>').replace("</table>", "</table></div>")
     return body, toc
@@ -274,7 +272,7 @@ def detail_html(c, older, newer):
         items = "".join(
             f"<dt>Q. {esc(f['q'])}</dt><dd>{esc(f['a'])}</dd>" for f in faq
         )
-        faq_html = f'<h3 id="faq">자주 묻는 질문</h3>\n<dl class="case-view__faq">{items}</dl>'
+        faq_html = f'<h2 id="faq">자주 묻는 질문</h2>\n<dl class="case-view__faq">{items}</dl>'
     blog_html = ""
     if c.get("blog"):
         items = "".join(
@@ -312,7 +310,8 @@ def detail_html(c, older, newer):
 <meta property="article:modified_time" content="{c['updated']}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+<link rel="stylesheet" href="assets/vendor/aos/aos.css">
+<link rel="stylesheet" href="assets/vendor/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/common.css">
 <link rel="stylesheet" href="assets/css/sub.css">
 <link rel="stylesheet" href="assets/css/cases.css">
@@ -329,7 +328,7 @@ def detail_html(c, older, newer):
   <section class="subvisual">
     <div class="subvisual__inner">
       <p class="subvisual__en">Case Studies</p>
-      <h2 class="subvisual__title">업무사례</h2>
+      <p class="subvisual__title">업무사례</p>
     </div>
   </section>
 
@@ -400,7 +399,7 @@ def detail_html(c, older, newer):
 
 <div id="footer"></div>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/js/layout.js"></script>
 <script src="assets/js/common.js"></script>
 </body>

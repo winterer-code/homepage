@@ -45,4 +45,7 @@ GitHub Pages로 배포되는 정적 사이트입니다. `main`에 푸시하면 �
 - 공통 헤더·푸터는 `assets/js/layout.js`에서 관리한다(메뉴명 "업무사례"). 검색엔진·AI 크롤러가 읽도록 빌드 때 `_tools/build_layout.py`가 각 HTML의 `<!-- LAYOUT:HEADER -->`·`<!-- LAYOUT:FOOTER -->` 구간에 미리 넣는다(node 필요). layout.js를 고치면 `python _tools/build_cases.py`를 실행해 전 페이지에 반영한다. 이 구간은 손으로 고치지 않는다.
 - 업무분야 페이지의 관련 업무사례(`<!-- RELATED -->` 구간)와 `llms.txt`도 build_cases.py가 자동 생성한다.
 - 페이지마다 h1은 하나: 서브페이지는 상단 제목(`subvisual__title`), 메인은 첫 슬라이드 제목, 사례 상세는 사례 제목.
+- 사례 본문의 `##`은 h2, `###`은 h3로 나온다(제목 단계를 건너뛰지 않음). 사례 상세 상단 배너의 "업무사례"는 h1이 따로 있어 `<p class="subvisual__title">`이다.
+- 사례 `title`은 40자 안팎으로 쓴다(검색 결과에서 30자쯤부터 잘림). 사건 유형·핵심 법명을 앞에 둔다. 메인(index.html) 제목은 대표님이 정한 "법률사무소 올본 - 모든 사건의 본질을 봅니다"이므로 바꾸지 않는다.
+- 외부 CDN을 쓰지 않는다. AOS·Swiper·Pretendard 글꼴은 `assets/vendor/`에 담겨 있다(`assets/vendor/README.txt`). 새 라이브러리도 사이트 안에 담고, 각 HTML `<head>`의 경로와 `_tools/build_cases.py`의 사례 페이지 틀을 함께 고친다.
 - 카드·상세 스타일은 `assets/css/cases.css`.

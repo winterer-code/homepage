@@ -4,7 +4,7 @@ published: true
 date: 2026-09-27
 category: ip
 case_type: 특허침해소송 · 피고 대리
-title: 특허침해소송 피고 대리 - 문언침해·균등침해 모두 부정, 원고 청구 전부 기각
+title: 특허침해소송 피고 대리 - 문언·균등침해 부정, 청구 전부 기각
 card_title:
   - 특허침해 불성립 인정,
   - 원고 청구 전부 기각

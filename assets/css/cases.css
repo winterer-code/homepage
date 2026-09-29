@@ -59,6 +59,9 @@
 .case-view__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 .case-view__tags li { font-size: 13px; color: var(--gray-text); border: 1px solid var(--gray-line); border-radius: 999px; padding: 3px 11px; }
 
+/* 사례 상세 상단 배너의 "업무사례" 글자는 제목(h1)이 따로 있어 p 로 두되, 다른 페이지 제목과 같은 모양을 유지 */
+p.subvisual__title { font-weight: 700; line-height: 1.35; letter-spacing: -0.03em; }
+
 .case-view__lead { margin: 0 0 28px; font-size: 17.5px; line-height: 1.8; color: #333; word-break: keep-all; }
 
 .case-view__toc { margin: 0 0 44px; padding: 18px 22px; background: var(--gray-bg); border-radius: var(--r-md); font-size: 15px; }
@@ -68,12 +71,12 @@
 .case-view__toc a { color: #333; }
 .case-view__toc a:hover { color: var(--navy); text-decoration: underline; }
 
-.case-view__body h3 {
+.case-view__body h2 {
   margin: 52px 0 14px; padding-top: 22px; border-top: 1px solid var(--gray-line);
   font-size: 22px; color: var(--navy); scroll-margin-top: calc(var(--header-h) + 16px);
 }
-.case-view__body h3:first-child { margin-top: 0; }
-.case-view__body h4 { margin: 28px 0 8px; font-size: 18px; color: var(--navy); }
+.case-view__body h2:first-child { margin-top: 0; }
+.case-view__body h3 { margin: 28px 0 8px; font-size: 18px; color: var(--navy); }
 .case-view__body p, .case-view__body li { font-size: 16px; line-height: 1.85; color: #444; word-break: keep-all; }
 .case-view__body ul { margin: 12px 0; padding-left: 22px; list-style: disc; }
 .case-view__body ol { margin: 12px 0; padding-left: 22px; list-style: decimal; }
@@ -104,6 +107,6 @@
 @media (max-width: 768px) {
   .case-view__head .case-view__title { font-size: 24px; }
   .case-view__lead { font-size: 16px; }
-  .case-view__body h3 { font-size: 20px; }
+  .case-view__body h2 { font-size: 20px; }
   .case-view__body tbody td:first-child { width: 40%; }
 }

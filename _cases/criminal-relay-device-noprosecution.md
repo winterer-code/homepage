@@ -4,7 +4,7 @@ published: true
 date: 2026-09-28
 category: criminal
 case_type: 전기통신사업법위반 · 피의자 변호
-title: 보이스피싱 중계기 설치 전기통신사업법위반 피의자 변호 - 혐의없음(증거불충분) 불기소
+title: 보이스피싱 중계기 설치 피의자 변호 - 전기통신사업법위반 혐의없음
 card_title:
   - 보이스피싱 중계기 설치 혐의,
   - 혐의없음 불기소

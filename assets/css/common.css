@@ -4,8 +4,7 @@
    공통 토큰 / 리셋 / 타이포 / 헤더·GNB / 푸터 / 퀵바 / 폼 / 서브비주얼
    ========================================================================== */
 
-/* Pretendard (CDN) — 오프라인 환경이면 아래 @import 를 지우고 로컬 폰트를 연결하세요. */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+/* Pretendard 글꼴은 각 페이지 <head> 의 assets/vendor/pretendard/pretendard.css 로 불러옵니다(사이트 안에 포함). */
 
 /* --------------------------------------------------------------------------
    1. Design Tokens

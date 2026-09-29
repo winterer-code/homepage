@@ -4,7 +4,7 @@ published: true
 date: 2026-09-28
 category: criminal
 case_type: 점유이탈물횡령 등 · 피의자 변호
-title: 습득한 선불카드 사용 사건 피의자 변호 - 기소유예 및 여신전문금융업법위반 혐의없음
+title: 선불카드 사용 사건 피의자 변호 - 기소유예·여신전문금융업법위반 혐의없음
 card_title:
   - 습득 카드 사용 혐의,
   - 기소유예·일부 혐의없음
