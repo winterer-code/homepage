@@ -42,6 +42,54 @@
   }
 }
 </script>
+<script type="application/ld+json" id="faq-ld">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "경찰에서 출석 요구를 받았는데 변호사가 함께할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "피의자는 변호인의 조력을 받을 권리가 있고, 신문에 변호인 참여를 요청할 수 있습니다. 출석 전에 사실관계와 자료를 정리해 두면 진술이 흔들리지 않습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "조사 전에 무엇을 준비해야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "사건 경위를 시간순으로 정리하고, 메시지·통화·계약서 등 관련 자료를 삭제하지 말고 보존하세요. 기억이 불분명한 부분은 추측으로 진술하지 마세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "고소를 당했는데 합의가 꼭 필요한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "필수는 아닙니다. 다만 합의는 처분이나 양형에서 참작될 수 있고, 합의로 사건이 종결되는 죄명(반의사불벌죄 등)도 있어 죄명별로 다릅니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "혐의없음과 기소유예는 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "혐의없음은 범죄 혐의가 인정되지 않는다는 처분입니다. 기소유예는 혐의는 인정하되 검사가 기소하지 않는 처분입니다. 어느 쪽이냐에 따라 이후 대응이 달라집니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "기술유출·영업비밀 사건은 무엇이 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "형사 절차와 함께 기술의 비밀성·경제적 가치 등 지식재산 쟁점을 같이 다뤄야 합니다."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body data-page="practice" class="is-sub">
@@ -200,6 +248,47 @@
               </div>
             </div>
           </section>
+
+          <!-- FAQ:START -->
+          <section class="blk" id="faq" aria-labelledby="faqTitle">
+            <div class="blk__head" data-aos="fade-up">
+              <h2 class="blk__title" id="faqTitle">자주 묻는 질문</h2>
+            </div>
+            <div class="acc" data-accordion data-accordion-single data-aos="fade-up">
+          <div class="acc__item is-open">
+            <button type="button" class="acc__q" aria-expanded="true"><span class="q">Q</span>경찰에서 출석 요구를 받았는데 변호사가 함께할 수 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>피의자는 변호인의 조력을 받을 권리가 있고, 신문에 변호인 참여를 요청할 수 있습니다. 출석 전에 사실관계와 자료를 정리해 두면 진술이 흔들리지 않습니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>조사 전에 무엇을 준비해야 하나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>사건 경위를 시간순으로 정리하고, 메시지·통화·계약서 등 관련 자료를 삭제하지 말고 보존하세요. 기억이 불분명한 부분은 추측으로 진술하지 마세요.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>고소를 당했는데 합의가 꼭 필요한가요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>필수는 아닙니다. 다만 합의는 처분이나 양형에서 참작될 수 있고, 합의로 사건이 종결되는 죄명(반의사불벌죄 등)도 있어 죄명별로 다릅니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>혐의없음과 기소유예는 어떻게 다른가요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>혐의없음은 범죄 혐의가 인정되지 않는다는 처분입니다. 기소유예는 혐의는 인정하되 검사가 기소하지 않는 처분입니다. 어느 쪽이냐에 따라 이후 대응이 달라집니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>기술유출·영업비밀 사건은 무엇이 다른가요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>형사 절차와 함께 기술의 비밀성·경제적 가치 등 지식재산 쟁점을 같이 다뤄야 합니다.</p>
+            </div>
+          </div>
+            </div>
+          </section>
+          <!-- FAQ:END -->
+
 
         </div>
       </div>

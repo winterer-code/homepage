@@ -42,6 +42,38 @@
   }
 }
 </script>
+<script type="application/ld+json" id="faq-ld">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "행정심판과 행정소송 중 무엇을 먼저 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "원칙적으로 둘 중 선택할 수 있고, 다만 법률에 따라 행정심판을 먼저 거쳐야 하는 경우가 있습니다. 처분 유형별로 확인해야 합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "처분을 다툴 수 있는 기간이 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "있습니다. 행정소송은 처분이 있음을 안 날부터 90일 이내가 원칙입니다(행정소송법 제20조). 기간을 놓치면 다툴 수 없습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "소송 중에도 처분의 효력을 멈출 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "요건을 갖추면 집행정지를 신청할 수 있습니다."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body data-page="practice" class="is-sub">
@@ -145,6 +177,35 @@
               </div>
             </div>
           </section>
+
+          <!-- FAQ:START -->
+          <section class="blk" id="faq" aria-labelledby="faqTitle">
+            <div class="blk__head" data-aos="fade-up">
+              <h2 class="blk__title" id="faqTitle">자주 묻는 질문</h2>
+            </div>
+            <div class="acc" data-accordion data-accordion-single data-aos="fade-up">
+          <div class="acc__item is-open">
+            <button type="button" class="acc__q" aria-expanded="true"><span class="q">Q</span>행정심판과 행정소송 중 무엇을 먼저 하나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>원칙적으로 둘 중 선택할 수 있고, 다만 법률에 따라 행정심판을 먼저 거쳐야 하는 경우가 있습니다. 처분 유형별로 확인해야 합니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>처분을 다툴 수 있는 기간이 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>있습니다. 행정소송은 처분이 있음을 안 날부터 90일 이내가 원칙입니다(행정소송법 제20조). 기간을 놓치면 다툴 수 없습니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>소송 중에도 처분의 효력을 멈출 수 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>요건을 갖추면 집행정지를 신청할 수 있습니다.</p>
+            </div>
+          </div>
+            </div>
+          </section>
+          <!-- FAQ:END -->
+
 
         </div>
       </div>

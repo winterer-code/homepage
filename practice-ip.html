@@ -53,6 +53,54 @@
   }
 }
 </script>
+<script type="application/ld+json" id="faq-ld">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "특허·상표 출원이 거절됐는데 불복할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "거절결정을 받으면 거절결정불복심판을 청구할 수 있고, 청구기간은 거절결정 등본 송달일부터 30일입니다(특허법 제132조의17 등). 기간이 짧으니 결정서를 받는 즉시 검토하세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "심판 결과에도 불복할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "심결에 대해서는 특허법원에 심결취소소송을 제기할 수 있고, 제소기간은 심결 등본 송달일부터 30일입니다(특허법 제186조 등). 그 판결에 대해서는 대법원에 상고할 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "경쟁사 특허나 상표를 무효로 하고 싶습니다.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "무효심판을 청구할 수 있습니다. 등록요건(신규성·진보성 등)을 갖추지 못한 이유를 증거로 입증해야 하며, 청구인 적격과 제척기간은 권리 종류별로 다릅니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "특허침해 경고장을 받았습니다. 어떻게 대응하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "먼저 권리범위에 속하는지 분석하고, 비침해 주장과 특허 무효 주장을 함께 검토합니다. 회신 전에 사실관계와 제품 자료를 정리해 두세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "직원 발명에 대해 보상을 받을 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "직무발명은 회사가 권리를 승계하면 종업원은 정당한 보상을 받을 권리가 있습니다(발명진흥법 제15조). 보상 규정 유무와 기여도에 따라 달라집니다."
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body data-page="practice" class="is-sub">
@@ -237,6 +285,47 @@
               </div>
             </div>
           </section>
+
+          <!-- FAQ:START -->
+          <section class="blk" id="faq" aria-labelledby="faqTitle">
+            <div class="blk__head" data-aos="fade-up">
+              <h2 class="blk__title" id="faqTitle">자주 묻는 질문</h2>
+            </div>
+            <div class="acc" data-accordion data-accordion-single data-aos="fade-up">
+          <div class="acc__item is-open">
+            <button type="button" class="acc__q" aria-expanded="true"><span class="q">Q</span>특허·상표 출원이 거절됐는데 불복할 수 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>거절결정을 받으면 거절결정불복심판을 청구할 수 있고, 청구기간은 거절결정 등본 송달일부터 30일입니다(특허법 제132조의17 등). 기간이 짧으니 결정서를 받는 즉시 검토하세요.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>심판 결과에도 불복할 수 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>심결에 대해서는 특허법원에 심결취소소송을 제기할 수 있고, 제소기간은 심결 등본 송달일부터 30일입니다(특허법 제186조 등). 그 판결에 대해서는 대법원에 상고할 수 있습니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>경쟁사 특허나 상표를 무효로 하고 싶습니다.<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>무효심판을 청구할 수 있습니다. 등록요건(신규성·진보성 등)을 갖추지 못한 이유를 증거로 입증해야 하며, 청구인 적격과 제척기간은 권리 종류별로 다릅니다.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>특허침해 경고장을 받았습니다. 어떻게 대응하나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>먼저 권리범위에 속하는지 분석하고, 비침해 주장과 특허 무효 주장을 함께 검토합니다. 회신 전에 사실관계와 제품 자료를 정리해 두세요.</p>
+            </div>
+          </div>
+          <div class="acc__item">
+            <button type="button" class="acc__q" aria-expanded="false"><span class="q">Q</span>직원 발명에 대해 보상을 받을 수 있나요?<i class="arw" aria-hidden="true"></i></button>
+            <div class="acc__a">
+              <p>직무발명은 회사가 권리를 승계하면 종업원은 정당한 보상을 받을 권리가 있습니다(발명진흥법 제15조). 보상 규정 유무와 기여도에 따라 달라집니다.</p>
+            </div>
+          </div>
+            </div>
+          </section>
+          <!-- FAQ:END -->
+
 
         </div>
       </div>
