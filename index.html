@@ -87,9 +87,12 @@
         "postalCode": "06236",
         "addressCountry": "KR"
       },
+      "hasMap": "https://naver.me/FgEppOZx",
       "sameAs": [
         "https://blog.naver.com/law_jhk",
-        "https://open.kakao.com/o/sblxZ3Ki"
+        "https://open.kakao.com/o/sblxZ3Ki",
+        "https://naver.me/FgEppOZx",
+        "https://maps.app.goo.gl/koDaeJsfMVfU85B77"
       ],
       "openingHoursSpecification": [{
         "@type": "OpeningHoursSpecification",
@@ -174,8 +177,6 @@
 <!-- ※ 좌표(geo)를 확인하면 아래 블록을 LegalService 의 "sameAs" 윗줄에 넣으세요.
      네이버지도에서 성홍타워 우클릭 → 좌표 복사
       "geo": { "@type": "GeoCoordinates", "latitude": 37.500000, "longitude": 127.030000 },
-     스마트플레이스 등록 후에는 아래 줄도 함께 추가하세요.
-      "hasMap": "본인 플레이스 URL",
 -->
 </head>
 
@@ -607,17 +608,18 @@
                네이버·카카오 지도로 바꾸고 싶으시면 README.md 8번 항목을 참고하세요.
                  · 네이버 지도는 공식 iframe 임베드를 제공하지 않습니다 (API 키 필요)
                  · 카카오맵은 '지도 퍼가기' 스니펫을 키 없이 쓸 수 있습니다 -->
-          <iframe src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138&amp;output=embed&amp;hl=ko&amp;z=17"
+          <iframe src="https://www.google.com/maps?q=%EB%B2%95%EB%A5%A0%EC%82%AC%EB%AC%B4%EC%86%8C%20%EC%98%AC%EB%B3%B8&amp;ftid=0x357ca18bb39653cd:0x58a88e7fca117785&amp;output=embed&amp;hl=ko&amp;z=17"
                   title="법률사무소 올본 위치 지도" loading="lazy" allowfullscreen
                   referrerpolicy="no-referrer-when-downgrade"></iframe>
           <div class="map__fallback" hidden>
             <p>지도를 불러오지 못했습니다.<br>아래 버튼으로 지도를 열어 주세요.</p>
-            <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138" class="btn btn--gold btn--sm" target="_blank" rel="noopener">네이버 지도에서 보기</a>
+            <a href="https://naver.me/FgEppOZx" class="btn btn--gold btn--sm" target="_blank" rel="noopener">네이버 지도에서 보기</a>
           </div>
         </div>
 
         <div class="map__links">
-          <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138" class="btn btn--navy btn--sm" target="_blank" rel="noopener">네이버 지도에서 보기</a>
+          <a href="https://naver.me/FgEppOZx" class="btn btn--navy btn--sm" target="_blank" rel="noopener">네이버 지도에서 보기</a>
+          <a href="https://maps.app.goo.gl/koDaeJsfMVfU85B77" class="btn btn--line btn--sm" target="_blank" rel="noopener">구글 지도에서 보기</a>
           <a href="https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138" class="btn btn--line btn--sm" target="_blank" rel="noopener">카카오맵에서 보기</a>
           <button type="button" class="btn btn--line btn--sm" data-copy="서울 강남구 테헤란로 138 성홍타워 4층">주소 복사</button>
         </div>

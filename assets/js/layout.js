@@ -27,7 +27,7 @@
     hours: "평일 09:00 ~ 18:00 (점심 12:00~13:00)",
     kakaoUrl: "https://open.kakao.com/o/sblxZ3Ki",
     naverUrl: "https://blog.naver.com/law_jhk",
-    naverMapUrl: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%ED%85%8C%ED%97%A4%EB%9E%80%EB%A1%9C%20138",  // TODO: 스마트플레이스 등록 후 플레이스 주소로 교체,
+    naverMapUrl: "https://naver.me/FgEppOZx",   // 네이버 지도(플레이스) 법률사무소 올본
     zip: "06236",
     /* 이메일 상담 — 제목과 양식이 채워진 채로 메일 창이 열립니다 */
     mailHref: "mailto:jhkim@olbonlaw.com?subject=" + encodeURIComponent("[상담 문의]") +
