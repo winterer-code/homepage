@@ -367,24 +367,64 @@ h1, h2, h3, h4, h5 { font-weight: 700; line-height: 1.35; letter-spacing: -0.03e
 /* --------------------------------------------------------------------------
    9. Quick side bar / mobile bottom bar
    -------------------------------------------------------------------------- */
+/* PC 플로팅 상담창 (스크롤을 따라 오른쪽에 고정) */
 .quick {
-  position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 150;
-  width: 76px; background: #fff; border: 1px solid var(--gray-line);
-  border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden;
+  position: fixed; right: 20px; transform: translateY(-50%); z-index: 150;
+  width: 208px; background: #fff; border: 1px solid var(--gray-line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-lg); overflow: hidden;
+  top: calc(50% + var(--header-h) / 2);
 }
 .quick__head {
-  padding: 12px 6px; background: var(--navy); color: #fff; text-align: center;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  position: relative; padding: 20px 18px 18px; background: var(--navy); color: #fff;
 }
-.quick__list li + li { border-top: 1px solid var(--gray-line); }
-.quick__list a, .quick__list button {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  width: 100%; padding: 14px 4px; font-size: 11.5px; font-weight: 600; color: var(--navy);
+.quick__eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--champagne); }
+.quick__title { margin-top: 4px; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+.quick__desc { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: rgba(255, 255, 255, 0.72); }
+.quick__fold {
+  position: absolute; top: 10px; right: 8px; width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.7);
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-.quick__list a:hover, .quick__list button:hover { background: var(--gray-bg); color: var(--gold-text); }
-.quick__list svg { width: 22px; height: 22px; fill: currentColor; }
-.quick__top { border-top: 1px solid var(--gray-line); background: var(--gray-bg); }
+.quick__fold:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.quick__fold svg { width: 18px; height: 18px; fill: currentColor; }
+.quick__body { padding: 16px 16px 14px; }
+.quick__btn {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%; height: 46px; border-radius: var(--r-md); font-size: 15px; font-weight: 700;
+  transition: filter var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.quick__btn + .quick__btn { margin-top: 8px; }
+.quick__btn svg { width: 20px; height: 20px; fill: currentColor; }
+.quick__btn--kakao { background: #fee500; color: #191919; }
+.quick__btn--kakao:hover { filter: brightness(0.95); }
+.quick__btn--mail { background: var(--navy); color: #fff; }
+.quick__btn--mail:hover { background: var(--navy-600); }
+.quick__note { margin-top: 10px; font-size: 11.5px; line-height: 1.5; color: var(--gray-text); word-break: keep-all; }
+.quick__hours {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gray-line);
+  font-size: 12px; line-height: 1.5;
+}
+.quick__hours dt { font-weight: 700; color: var(--navy); }
+.quick__hours dd { color: var(--gray-text); }
+.quick__foot { display: flex; border-top: 1px solid var(--gray-line); background: var(--gray-bg); }
+.quick__foot a, .quick__foot button {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 11px 4px; font-size: 12px; font-weight: 600; color: var(--navy);
+  transition: color var(--dur) var(--ease);
+}
+.quick__foot a + button { border-left: 1px solid var(--gray-line); }
+.quick__foot a:hover, .quick__foot button:hover { color: var(--gold-text); }
+.quick__foot svg { width: 16px; height: 16px; fill: currentColor; }
+/* 접힌 상태: 세로 탭만 표시 */
+.quick__tab { display: none; }
+.quick.is-folded { width: 64px; }
+.quick.is-folded .quick__head, .quick.is-folded .quick__body, .quick.is-folded .quick__foot { display: none; }
+.quick.is-folded .quick__tab {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;
+  padding: 16px 4px; background: var(--navy); color: #fff; font-size: 12.5px; font-weight: 700; line-height: 1.35;
+}
+.quick.is-folded .quick__tab svg { width: 22px; height: 22px; fill: #fee500; }
+/* 화면이 좁은 PC에서는 본문을 가리지 않도록 처음부터 접힌 탭으로 시작 (common.js) */
 
 /* --------------------------------------------------------------------------
    10. Footer

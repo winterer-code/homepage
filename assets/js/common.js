@@ -91,6 +91,29 @@
   });
 
   /* ------------------------------------------------------------------
+     3-1. 플로팅 상담창 접기/펼치기
+          - 화면 폭 1680px 미만 PC에서는 본문을 가리지 않도록 접힌 탭으로 시작
+          - 방문자가 접거나 펼친 상태는 브라우저에 기억
+     ------------------------------------------------------------------ */
+  var quick = document.getElementById("quickConsult");
+  if (quick) {
+    var saved = null;
+    try { saved = localStorage.getItem("olbonQuickFolded"); } catch (err) {}
+    var setFolded = function (folded) {
+      quick.classList.toggle("is-folded", folded);
+      var fold = quick.querySelector(".quick__fold");
+      if (fold) fold.setAttribute("aria-expanded", folded ? "false" : "true");
+    };
+    setFolded(saved !== null ? saved === "1" : window.innerWidth < 1680);
+    quick.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-quick-fold]")) return;
+      var folded = !quick.classList.contains("is-folded");
+      setFolded(folded);
+      try { localStorage.setItem("olbonQuickFolded", folded ? "1" : "0"); } catch (err) {}
+    });
+  }
+
+  /* ------------------------------------------------------------------
      4. AOS (스크롤 페이드업) — CDN 로드 실패 시에도 콘텐츠가 보이도록 처리
      ------------------------------------------------------------------ */
   if (window.AOS) {

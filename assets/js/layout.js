@@ -177,14 +177,28 @@
 
   function quickHtml() {
     return (
-      '<aside class="quick" aria-label="빠른 상담 메뉴">' +
-      '<div class="quick__head">QUICK<br>MENU</div>' +
-      '<ul class="quick__list">' +
-      '<li><a href="' + SITE.kakaoUrl + '" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡</span></a></li>" +
-      '<li><a href="' + SITE.mailHref + '">' + ICON.mail + "<span>이메일상담</span></a></li>" +
-      '<li><a href="location.html">' + ICON.map + "<span>오시는길</span></a></li>" +
-      '<li class="quick__top"><button type="button" data-scroll-top>' + ICON.top + "<span>TOP</span></button></li>" +
-      "</ul></aside>" +
+      /* PC 플로팅 상담창 — 스크롤을 따라 화면 오른쪽에 고정 */
+      '<aside class="quick" id="quickConsult" aria-label="상담 신청">' +
+      '<div class="quick__head">' +
+      '<p class="quick__eyebrow">CONSULTATION</p>' +
+      '<p class="quick__title">법률상담 신청</p>' +
+      '<p class="quick__desc">김재훈 변호사가<br>직접 확인 후 답변드립니다</p>' +
+      '<button type="button" class="quick__fold" data-quick-fold aria-expanded="true" aria-controls="quickConsult" aria-label="상담창 접기">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 5.4 15.2 12l-6.6 6.6-1.4-1.4L12.4 12 7.2 6.8l1.4-1.4Z"/></svg></button>' +
+      "</div>" +
+      '<div class="quick__body">' +
+      '<a href="' + SITE.kakaoUrl + '" class="quick__btn quick__btn--kakao" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡 상담</span></a>" +
+      '<a href="' + SITE.mailHref + '" class="quick__btn quick__btn--mail">' + ICON.mail + "<span>이메일 상담</span></a>" +
+      '<p class="quick__note">이메일 상담을 누르면 양식이 채워진 메일 창이 열립니다. 관련 자료를 첨부해 보내 주세요.</p>' +
+      '<dl class="quick__hours"><dt>상담 시간</dt><dd>평일 09:00~18:00<br>(점심 12:00~13:00)</dd></dl>' +
+      "</div>" +
+      '<div class="quick__foot">' +
+      '<a href="location.html">' + ICON.map + "<span>오시는길</span></a>" +
+      '<button type="button" data-scroll-top>' + ICON.top + "<span>TOP</span></button>" +
+      "</div>" +
+      /* 접었을 때 보이는 탭 */
+      '<button type="button" class="quick__tab" data-quick-fold aria-label="상담창 펼치기">' + ICON.chat + "<span>상담<br>신청</span></button>" +
+      "</aside>" +
       /* 모바일 하단 고정 바 */
       '<nav class="quickbar" aria-label="빠른 상담 메뉴(모바일)">' +
       '<a href="' + SITE.kakaoUrl + '" class="is-point" target="_blank" rel="noopener">' + ICON.chat + "<span>카카오톡</span></a>" +
