@@ -576,8 +576,19 @@
     var fb = box.querySelector(".map__fallback");
     if (!frame || !fb) return;
     var loaded = false;
-    frame.addEventListener("load", function () { loaded = true; });
-    setTimeout(function () { if (!loaded) fb.hidden = false; }, 6000);
+    // 늦게라도 지도가 뜨면 대체 화면을 다시 숨김
+    frame.addEventListener("load", function () { loaded = true; fb.hidden = true; });
+    // 지연 로딩(loading="lazy") 지도는 화면에 보일 때부터 불러오므로,
+    // 실패 판정 타이머도 지도가 화면에 들어온 뒤에 시작 (모바일에서 오판 방지)
+    var startTimer = function () { setTimeout(function () { if (!loaded) fb.hidden = false; }, 10000); };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); startTimer(); }
+      });
+      io.observe(box);
+    } else {
+      startTimer();
+    }
   });
 
 })();
