@@ -18,7 +18,7 @@
   var SITE = {
     nameKo: "법률사무소 올본",
     nameEn: "OLBON LAW OFFICE",
-    /* 상담 창구는 카카오톡 오픈채팅과 이메일 두 가지입니다.
+    /* 상담 창구는 카카오톡과 이메일 두 가지입니다.
        전화·팩스 항목은 사용하지 않으므로 두지 않습니다. */
     email: "jhkim@olbonlaw.com",
     address: "서울 강남구 테헤란로 138 성홍타워 4층",
